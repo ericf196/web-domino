@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
@@ -38,7 +39,12 @@ public function form_nuevo_permiso(){
 public function listado_usuarios(){
     //presenta un listado de usuarios paginados de 100 en 100
   $usuarios=User::paginate(100);
-  return view("adminlte::listados.listado_usuarios")->with("usuarios",$usuarios);
+    if(Auth::user()->isRole('administrador') || Auth::user()->isRole('admin_liga')|| Auth::user()->isRole('super_usuario') ){
+        return view("adminlte::listados.listado_usuarios")->with("usuarios",$usuarios);
+    }else{
+        return view("adminlte::errors.404");
+    }
+
 }
 
 

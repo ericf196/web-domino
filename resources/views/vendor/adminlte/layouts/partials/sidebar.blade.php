@@ -31,18 +31,47 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
+            <li class="header"> </li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
+            <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+            @role('administrador')
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-trophy'></i> <span>Ligas</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="{{ url('listado_usuarios') }}">Listado Usuarios1</a></li>
+                    <li><a href="{{ url('listado_usuarios') }}">Crear Ligas</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-window-restore'></i> <span>Sesiones</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/') }}">Top</a></li>
+                    <li><a href="{{ url('/') }}">Empresa</a></li>
+                    <li><a href="{{ url('/') }}">Posiciones</a></li>
+                    <li><a href="{{ url('/') }}">Noticias</a></li>
+                    <li><a href="{{ url('/') }}">Suscribir</a></li>
+                    <li><a href="{{ url('/') }}">Pie de página</a></li>
+                </ul>
+            </li>
+            @endrole
+            <li><a href="{{ url('/') }}"><i class='fa fa-user'></i> <span>Perfil</span></a></li>
+            @role('admin_liga')
+            <li class="treeview">
+                <a href="#"><i class='fa fa-users'></i> <span>Jugador</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('listado_usuarios') }}">Crear Jugador</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-sign-language'></i> <span>Juegos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/') }}">Superpolla</a></li>
+                    <li><a href="{{ url('/') }}">Grand Slam</a></li>
+                    <li><a href="{{ url('/') }}">Batallas entre escuderías</a></li>
+                </ul>
+            </li>
+            @endrole
+            {{-- @role('administrador')
+            @endrole --}}
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
