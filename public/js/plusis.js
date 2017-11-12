@@ -44,6 +44,7 @@ function cargar_formulario(arg){
    if(arg==1){ var miurl=urlraiz+"/form_nuevo_usuario"; }
    if(arg==2){ var miurl=urlraiz+"/form_nuevo_rol"; }
    if(arg==3){ var miurl=urlraiz+"/form_nuevo_permiso"; }
+   if(arg==4){ var miurl=urlraiz+"/form_nuevo_liga"; }
 
     $.ajax({
     url: miurl
@@ -72,7 +73,8 @@ $(document).on("submit",".formentrada",function(e){
   if(quien=="f_editar_acceso"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E3";  }
   if(quien=="f_borrar_usuario"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
   if(quien=="f_asignar_permiso"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  
+  if(quien=="f_crear_liga"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
+
   $("#"+div_resul+"").html( $("#cargador_empresa").html());
   
   $.ajax({

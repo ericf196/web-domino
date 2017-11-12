@@ -12,7 +12,7 @@
 
 
         <div class="box box-primary box-gris">
-
+            @role('super_usuario')
             <div class="box-header">
                 <h4 class="box-title">Usuarios</h4>
                 <form action="{{ url('buscar_usuario') }}" method="post">
@@ -32,11 +32,9 @@
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar
                         Usuario</a>
                     <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Usuarios</a>
-                    @role('super_usuario')
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary"
                        onclick="cargar_formulario(2);">Roles</a>
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);">Permisos</a>
-                    @endrole
                 </div>
 
             </div>
@@ -49,8 +47,7 @@
                         <thead>
                         <tr>
                             <th>codigo</th>
-                            @role('super_usuario')
-                            <th>Rol</th> @endrole
+                            <th>Rol</th>
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Acción</th>
@@ -61,7 +58,7 @@
                         @foreach($usuarios as $usuario)
                             <tr role="row" class="odd">
                                 <td>{{ $usuario->id }}</td>
-                                @role('super_usuario')
+
                                 <td><span class="label label-default">
 
                                         @foreach($usuario->getRoles() as $roles)
@@ -70,7 +67,6 @@
 
 								</span>
                                 </td>
-                                @endrole
                                 <td class="mailbox-messages mailbox-name">
                                     <div class="enlaceJs" onclick="verinfo_usuario({{  $usuario->id }})"
                                          style="display:block"><i
@@ -95,7 +91,75 @@
 
                 </div>
             </div>
+            <br>
+            @endrole
 
+
+
+            @role('administrador')
+            <div class="box-header">
+                <h4 class="box-title">Liga</h4>
+                <form action="{{ url('buscar_usuario') }}" method="post">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" id="dato_buscado" name="dato_buscado" required>
+                        <span class="input-group-btn">
+					<input type="submit" class="btn btn-primary" value="buscar">
+					</span>
+
+                    </div>
+
+                </form>
+
+
+                <div class="margin" id="botones_control">
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(4)">Agregar
+                        Liga</a>
+                    <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Liga</a>
+                </div>
+
+            </div>
+
+
+            <div class="box-body box-white">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>codigo</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Email</th>
+                            <th>Ciudad</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($leagues as $league)
+                            <tr role="row" class="odd">
+                                <td>{{ $league->id }}</td>
+                                <td class="mailbox-messages mailbox-name">
+                                    <div class="enlaceJs" onclick="verinfo_usuario({{  $league->id }})"
+                                         style="display:block"><i
+                                                class="fa fa-user"></i>&nbsp;&nbsp;{{ $league->name_league  }}</div>
+                                </td>
+                                <td>{{ $league->state}}</td>
+                                <td>{{ $league->email }}</td>
+                                <td>{{ $league->city }}</td>
+
+                            </tr>
+                        @endforeach
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            @endrole
 
             {{ $usuarios->links() }}
 

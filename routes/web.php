@@ -31,7 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('buscar_usuario', 'UsuariosController@buscar_usuario');
     Route::post('borrar_usuario', 'UsuariosController@borrar_usuario');
     Route::post('editar_acceso', 'UsuariosController@editar_acceso');
-  
 
     Route::post('crear_rol', 'UsuariosController@crear_rol');
     Route::post('crear_permiso', 'UsuariosController@crear_permiso');
@@ -48,5 +47,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quitar_rol/{idusu}/{idrol}', 'UsuariosController@quitar_rol');
     Route::get('form_borrado_usuario/{idusu}', 'UsuariosController@form_borrado_usuario');
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
+
+    Route::post('crear_liga', 'UsuariosController@crear_liga'); //crea liga
+    Route::get('form_nuevo_liga', 'UsuariosController@form_nuevo_liga');
     
 });
+
+Route::get('all', 'UsuariosController@all');
