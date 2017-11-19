@@ -29,4 +29,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function league()
+    {
+        return $this->hasOne(League::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'games','user_id','category_id');
+    }
+
+
+
 }

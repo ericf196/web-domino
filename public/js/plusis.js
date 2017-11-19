@@ -22,7 +22,29 @@ function  verinfo_usuario(arg){
  
 }
 
+function  verinfo_league(arg){
 
+
+  var urlraiz=$("#url_raiz_proyecto").val();
+  var miurl =urlraiz+"/form_editar_league/"+arg+""; 
+  $("#capa_modal").show();
+  $("#capa_formularios").show();
+  var screenTop = $(document).scrollTop();
+  $("#capa_formularios").css('top', screenTop);
+  $("#capa_formularios").html($("#cargador_empresa").html());
+
+    $.ajax({
+    url: miurl
+    }).done( function(resul) 
+    {
+     $("#capa_formularios").html(resul);
+   
+    }).fail( function() 
+   {
+    $("#capa_formularios").html('<span>... Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+   }) ;
+ 
+}
 
 
 $(document).on("click",".div_modal", function(e){
@@ -30,8 +52,6 @@ $(document).on("click",".div_modal", function(e){
 	$("#capa_formularios").hide();
 	$("#capa_formularios").html("");
 })
-
-
 
 
 function cargar_formulario(arg){
@@ -60,7 +80,6 @@ function cargar_formulario(arg){
 }
 
 
-
 $(document).on("submit",".formentrada",function(e){
   e.preventDefault();
   var quien=$(this).attr("id");
@@ -71,6 +90,7 @@ $(document).on("submit",".formentrada",function(e){
   if(quien=="f_crear_permiso"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
   if(quien=="f_editar_usuario"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E2";  }
   if(quien=="f_editar_acceso"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E3";  }
+  if(quien=="f_editar_league"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E2";  }
   if(quien=="f_borrar_usuario"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
   if(quien=="f_asignar_permiso"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
   if(quien=="f_crear_liga"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
@@ -89,14 +109,13 @@ $(document).on("submit",".formentrada",function(e){
        
     },
     error : function(xhr, status) {
-        $("#"+div_resul+"").html('ha ocurrido un error, revise su conexion e intentelo nuevamente');
+        $("#"+div_resul+"").html('Ha ocurrido un error, revise su conexion e intentelo nuevamente');
     }
 
   });
 
 
 })
-
 
 
 function asignar_rol(idusu){

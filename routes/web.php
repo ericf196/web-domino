@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-    //return redirect('/login');
+    //return view('welcome');
+    return redirect('/login');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -50,7 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('crear_liga', 'UsuariosController@crear_liga'); //crea liga
     Route::get('form_nuevo_liga', 'UsuariosController@form_nuevo_liga');
+    Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');
+    Route::post('editar_league', 'UsuariosController@editar_league');
+    Route::post('buscar_league', 'UsuariosController@buscar_league');
     
 });
+
 
 Route::get('all', 'UsuariosController@all');

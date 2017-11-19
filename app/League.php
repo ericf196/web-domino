@@ -15,5 +15,9 @@ class League extends Model
         'name_league', 'description', 'state', 'city', 'address', 'name_admin','email','phone','user_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
