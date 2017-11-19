@@ -13,7 +13,7 @@
         <div class="box box-primary box-gris">
 
             <!--panel usuarios-->
-            @role('super_usuario')
+            @role('admin_liga')
             <div class="box-header">
                 <h4 class="box-title">Usuarios</h4>
                 <form action="{{ url('buscar_usuario') }}" method="post">
@@ -31,11 +31,13 @@
 
                 <div class="margin" id="botones_control">
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar
-                        Usuario</a>
-                    <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Usuarios</a>
+                        Jugador</a>
+                    <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Jugadores</a>
+                    @role('super_usuario')
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary"
                        onclick="cargar_formulario(2);">Roles</a>
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);">Permisos</a>
+                    @endrole
                 </div>
 
             </div>
@@ -48,7 +50,9 @@
                         <thead>
                         <tr>
                             <th>codigo</th>
+                            @role('super_usuario')
                             <th>Rol</th>
+                            @endrole
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Acción</th>
@@ -59,15 +63,15 @@
                         @foreach($usuarios as $usuario)
                             <tr role="row" class="odd">
                                 <td>{{ $usuario->id }}</td>
-
+                                @role('super_usuario')
                                 <td><span class="label label-default">
 
                                         @foreach($usuario->getRoles() as $roles)
                                             {{  $roles.","  }}
                                         @endforeach
-
 								</span>
                                 </td>
+                                @endrole
                                 <td class="mailbox-messages mailbox-name">
                                     <div class="enlaceJs" onclick="verinfo_usuario({{  $usuario->id }})"
                                          style="display:block"><i

@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index');
     Route::get('/listado_usuarios', 'UsuariosController@listado_usuarios');
+
+    Route::get('/listado_jugadores', 'UsuariosController@listado_jugadores');
+
     Route::post('crear_usuario', 'UsuariosController@crear_usuario');
     Route::post('editar_usuario', 'UsuariosController@editar_usuario');
     Route::post('buscar_usuario', 'UsuariosController@buscar_usuario');

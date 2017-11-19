@@ -54,8 +54,24 @@ class UsuariosController extends Controller
         //presenta un listado de usuarios paginados de 100 en 100
         $usuarios = User::paginate(100);
         $leagues = League::paginate(100);
-        if (Auth::user()->isRole('administrador') || Auth::user()->isRole('admin_liga') || Auth::user()->isRole('super_usuario')) {
+        if (Auth::user()->isRole('administrador') || Auth::user()->isRole('super_usuario')) {
             return view("adminlte::listados.listado_usuarios")->with("usuarios", $usuarios)->with("leagues", $leagues);
+        } else {
+            return view("adminlte::errors.404");
+        }
+    }
+
+
+    public function listado_jugadores()
+    {
+        //$userLeague = Auth::user()->league_id;
+        $userId = Auth::user()->id;
+        $league=League::where('user_id', '=', $userId)->first();
+        $userLeagueEmail = Auth::user()->email;
+        $players = User::where([['league_id', '=', $league->id], ['email', '<>', $userLeagueEmail]])->paginate(100);
+
+        if (Auth::user()->isRole('admin_liga')) {
+            return view("adminlte::listados.listado_jugadores")->with("players", $players);
         } else {
             return view("adminlte::errors.404");
         }
@@ -65,13 +81,12 @@ class UsuariosController extends Controller
 
     public function crear_usuario(Request $request)
     {
-        //crea un nuevo usuario en el sistema
-
-        $reglas = ['password' => 'required|min:8',
-            'email' => 'required|email|unique:users',];
+        $reglas = ['password' => 'required|min:8|confirmed',
+            'email' => 'required|email|unique:users'];
 
         $mensajes = ['password.min' => 'El password debe tener al menos 8 caracteres',
-            'email.unique' => 'El email ya se encuentra registrado en la base de datos',];
+            'email.unique' => 'El email ya se encuentra registrado en la base de datos',
+            'password.confirmed' => 'Su password no coincide',];
 
         $validator = Validator::make($request->all(), $reglas, $mensajes);
         if ($validator->fails()) {
@@ -79,17 +94,30 @@ class UsuariosController extends Controller
                 ->withErrors($validator->errors());
         }
 
+        $idUser = Auth::user()->id;
+        $idLeague=League::where('user_id','=',$idUser)->first()->id;
+
         $usuario = new User;
         $usuario->name = strtoupper($request->input("nombres") . " " . $request->input("apellidos"));
         $usuario->nombres = strtoupper($request->input("nombres"));
         $usuario->apellidos = strtoupper($request->input("apellidos"));
-        $usuario->telefono = $request->input("telefono");
+        $usuario->cedula = $request->input("cedula");
+        $usuario->state = strtoupper($request->input("state"));
+        $usuario->city = strtoupper($request->input("city"));
+        $usuario->telefono = $request->input("phone");
+        $usuario->association = strtoupper($request->input("association"));
+        $usuario->federation = strtoupper($request->input("federation"));
+        $usuario->team = strtoupper($request->input("team"));
         $usuario->email = $request->input("email");
         $usuario->password = bcrypt($request->input("password"));
+        $usuario->league_id = $idLeague;
+        $save = $usuario->save();
+        $userIdInclude = User::where('email', '=', $request->input("email"))->first()->id;
 
-        if ($usuario->save()) {
+        $rolIdInclude = User::find($userIdInclude);
+        $rolIdInclude->roles()->attach(3);
 
-
+        if ($save) {
             return view("adminlte::mensajes.msj_usuario_creado")->with("msj", "Usuario agregado correctamente");
         } else {
             return view("adminlte::mensajes.mensaje_error")->with("msj", "...Hubo un error al agregar ;...");
@@ -118,6 +146,7 @@ class UsuariosController extends Controller
         $usuario->telefono = $request->input("phone");
         $usuario->email = $request->input("email");
         $usuario->password = bcrypt($request->input("password"));
+        $usuario->league_id = 0;
         $usuario->save();
 
         $userIdInclude = User::where('email', '=', $request->input("email"))->first()->id;
@@ -206,12 +235,20 @@ class UsuariosController extends Controller
 
     public function editar_usuario(Request $request)
     {
-
         $idusuario = $request->input("id_usuario");
+
         $usuario = User::find($idusuario);
-        $usuario->name = strtoupper($request->input("nombres"));
+        $usuario->name = strtoupper($request->input("nombres") . " " . $request->input("apellidos"));
+        $usuario->nombres = strtoupper($request->input("nombres"));
         $usuario->apellidos = strtoupper($request->input("apellidos"));
+        $usuario->cedula = $request->input("cedula");
+        $usuario->state = strtoupper($request->input("state"));
+        $usuario->city = strtoupper($request->input("city"));
         $usuario->telefono = $request->input("telefono");
+        $usuario->association = strtoupper($request->input("association"));
+        $usuario->federation = strtoupper($request->input("federation"));
+        $usuario->team = strtoupper($request->input("team"));
+//        $usuario->email = $request->input("email");
 
         if ($request->has("rol")) {
             $rol = $request->input("rol");
@@ -231,7 +268,7 @@ class UsuariosController extends Controller
     public function form_editar_league($id)
     {
         $leagues = League::find($id);
-        $user=$leagues->user;
+        $user = $leagues->user;
         $roles = Role::all();
         return view("vendor.adminlte.formularios.form_editar_league")->with("leagues", $leagues)->with("user", $user);
 
@@ -244,7 +281,7 @@ class UsuariosController extends Controller
         $league = League::find($idleague);
 
         $reglas = ['password' => 'required|min:8|confirmed',
-            'email' => 'required|email|unique:users,email,'.$iduser .'id'];
+            'email' => 'required|email|unique:users,email,' . $iduser . 'id'];
 
         $mensajes = ['password.min' => 'El password debe tener al menos 8 caracteres',
             'email.unique' => 'El email ya se encuentra registrado en la base de datos',
@@ -315,6 +352,21 @@ class UsuariosController extends Controller
 
     public function editar_acceso(Request $request)
     {
+        $iduser = $request->input("id_usuario");
+
+        $reglas = ['password' => 'required|min:8|confirmed',
+            'email' => 'required|email|unique:users,email,' . $iduser . 'id'];
+
+        $mensajes = ['password.min' => 'El password debe tener al menos 8 caracteres',
+            'email.unique' => 'El email ya se encuentra registrado en la base de datos',
+            'password.confirmed' => 'Su password no coincide',];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+        if ($validator->fails()) {
+            return view("adminlte::mensajes.mensaje_error")->with("msj", "...Existen errores...")
+                ->withErrors($validator->errors());
+        }
+
         $idusuario = $request->input("id_usuario");
         $usuario = User::find($idusuario);
         $usuario->email = $request->input("email");
