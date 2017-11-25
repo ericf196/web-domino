@@ -56,6 +56,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');
     Route::post('editar_league', 'UsuariosController@editar_league');
     Route::post('buscar_league', 'UsuariosController@buscar_league');
+
+    Route::get('ing_noticias', 'NewsController@ing_noticias');
+
+
     
 });
 

@@ -54,6 +54,7 @@
             </li>
             @endrole
             <li><a href="{{ url('/') }}"><i class='fa fa-user'></i> <span>Perfil</span></a></li>
+
             @role('admin_liga')
             <li class="treeview">
                 <a href="#"><i class='fa fa-users'></i> <span>Jugador</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -69,6 +70,7 @@
                     <li><a href="{{ url('/') }}">Batallas entre escuderías</a></li>
                 </ul>
             </li>
+            <li><a href="{{ url('/ing_noticias') }}"><i class='fa fa-user'></i> <span>Noticias</span></a></li>
             @endrole
             {{-- @role('administrador')
             @endrole --}}
