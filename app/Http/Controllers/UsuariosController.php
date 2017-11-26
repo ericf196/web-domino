@@ -233,6 +233,13 @@ class UsuariosController extends Controller
             ->with("roles", $roles);
     }
 
+    public function form_editar_perfil()
+    {
+        $usuario=Auth::user();
+        return view("adminlte::formularios.form_editar_perfil")->with('usuario', $usuario);
+
+    }
+
     public function editar_usuario(Request $request)
     {
         $idusuario = $request->input("id_usuario");
@@ -439,10 +446,23 @@ class UsuariosController extends Controller
         $prueba=User::find(4)->categories()->withPivot('jj ', 'jg','jp','pts_p','pts_n ','avg ','efec','pro','pro_g ')->get();
         echo($prueba);*/
 
-        $idleague = 10;
+        /*$idleague = 10;
         $league = League::find($idleague);
-        echo($league->user);
+        echo($league->user);*/
 
+        $idleague = 2;
+        $league = League::find($idleague);
+//        echo($league->categories()->wherePivot('category_id', '=', 3)->get());
+
+        foreach ($league->categories()->wherePivot('category_id', '=', 3)->get() as $category)
+        {
+            echo $category->users()->withPivot('jj','jg','jp','pts_p','pts_n','avg','efec','pro','pro_g','created_at')->get();
+        }
+    }
+
+    public function editar_perfil()
+    {
+        return view("adminlte::mensajes.msj_usuario_creado");
     }
 
 

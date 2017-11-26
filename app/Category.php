@@ -12,6 +12,11 @@ class Category extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'games','category_id','user_id' );
+        return $this->belongsToMany(User::class, 'games','category_id','user_id')/*->withPivot('jj','jg','jp','pts_p','pts_n','avg','efec','pro','pro_g','created_at')*/;
+    }
+
+    public function leagues()
+    {
+        return $this->belongsToMany(League::class)->withPivot('created_at', 'updated_at');
     }
 }

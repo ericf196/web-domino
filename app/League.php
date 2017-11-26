@@ -25,4 +25,9 @@ class League extends Model
         return $this->hasMany(News::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withPivot('created_at', 'updated_at');
+    }
+
 }

@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     //return view('welcome');
     return redirect('/login');
-});
+});*/
+
+
+
+
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
@@ -57,11 +63,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('editar_league', 'UsuariosController@editar_league');
     Route::post('buscar_league', 'UsuariosController@buscar_league');
 
+
+    Route::post('editar_perfil', 'UsuariosController@editar_perfil');
+    Route::get('form_editar_perfil', 'UsuariosController@form_editar_perfil');
+
     Route::get('ing_noticias', 'NewsController@ing_noticias');
 
-
-    
 });
 
 
-Route::get('all', 'UsuariosController@all');
+Route::get('/', 'IndexController@index');
+Route::get('estado', 'IndexController@estado');
+Route::get('liga', 'IndexController@liga');
+
+
+Route::get('all', 'UsuariosController@all'); // test
