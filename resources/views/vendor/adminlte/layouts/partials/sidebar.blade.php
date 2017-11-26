@@ -70,7 +70,7 @@
                     <li><a href="{{ url('/') }}">Batallas entre escuderías</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url('/ing_noticias') }}"><i class='fa fa-user'></i> <span>Noticias</span></a></li>
+            <li><a href="{{ url('/panel_noticias') }}"><i class='fa fa-user'></i> <span>Noticias</span></a></li>
             @endrole
             {{-- @role('administrador')
             @endrole --}}

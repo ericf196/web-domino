@@ -21,21 +21,21 @@
                         <span class="input-group-btn">
 					<input type="submit" class="btn btn-primary" value="buscar">
 					</span>
-
                     </div>
 
                 </form>
                 <div class="margin" id="botones_control">
-                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar
-                        Jugador</a>
-                    <a href="{{ url("/listado_jugadores") }}" class="btn btn-xs btn-primary">Listado Jugadores</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(6);">Agregar
+                        Noticias</a>
+                    <a href="{{ url("/listado_jugadores") }}" class="btn btn-xs btn-primary">Listado Jugadores (Falta
+                        modificar)</a>
                 </div>
 
             </div>
             <br>
             @endrole
 
-        <!-- busqueda liga sin resultados -->
+                    <!-- busqueda liga sin resultados -->
             {{--{{ $players->links() }}
 
             @if(count($players)==0)

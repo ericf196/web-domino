@@ -67,7 +67,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('editar_perfil', 'UsuariosController@editar_perfil');
     Route::get('form_editar_perfil', 'UsuariosController@form_editar_perfil');
 
-    Route::get('ing_noticias', 'NewsController@ing_noticias');
+    Route::get('panel_noticias', 'NewsController@panel_noticias');
+    Route::get('form_nuevo_noticia', 'NewsController@form_nuevo_noticia');
+
+    //Perfil Usuario
+    Route::post('cambiar_password', 'UsuariosController@cambiar_password');
+    Route::post('cambiar_informacion', 'UsuariosController@cambiar_informacion');
+    Route::post('subir_imagen_usuario', 'UsuariosController@subir_imagen_usuario');
 
 });
 
@@ -78,3 +84,6 @@ Route::get('liga', 'IndexController@liga');
 
 
 Route::get('all', 'UsuariosController@all'); // test
+
+
+Route::get('create_directory', 'IndexController@create_directory'); // test Crear Carpeta

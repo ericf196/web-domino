@@ -12,11 +12,10 @@
 
                 <div id="notificacion_resul_feu"></div>
 
-                <form id="f_editar_perfil" method="post" action="{{ url('editar_perfil') }} "
+                <form id="f_editar_perfil" method="post" action="cambiar_informacion"
                       class="form-horizontal formentrada">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <input type="hidden" name="id_usuario" value="{{ $usuario->id }}">
-
 
                     <div class="box-body ">
                         <div class="form-group col-xs-12">
@@ -49,7 +48,7 @@
                         </div>
                         <div class="form-group col-xs-12">
                             <label for="phone">Telefono</label>
-                            <input type="text" class="form-control" id="phone" name="phone"
+                            <input type="text" class="form-control" id="telefono" name="telefono"
                                    value="{{ $usuario->telefono }}">
                         </div>
                         <div class="form-group col-xs-12">
@@ -58,14 +57,16 @@
                                    value="{{ $usuario->team }}">
                         </div>
                         <div class="form-group col-xs-12">
-                            <label for="email">Email*</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                   value="{{ $usuario->email }}">
+                            <label for="federation">Federacion</label>
+                            <input type="text" class="form-control" id="federation" name="federation"
+                                   value="{{ $usuario->federation }}">
                         </div>
-
+                        <div class="form-group col-xs-12">
+                            <label for="association">Asociacion</label>
+                            <input type="text" class="form-control" id="association" name="association"
+                                   value="{{ $usuario->association }}">
+                        </div>
                     </div>
-
-
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Actualizar Datos</button>
                     </div>
@@ -75,7 +76,6 @@
         </div> <!-- end col mod 6 -->
 
         <div class="col-md-6">
-
 
             <div class="box box-primary">
                 <div class="box-header">
@@ -95,7 +95,7 @@
                         <div class="form-group col-xs-12">
 
                             <?php if ($usuario->url_image == "") {
-                                $usuario->url_image = "img/avatar.png";
+                                $usuario->url_image = "img/avatar.jpg";
                             }  ?>
                             <img src="<?=  $usuario->url_image;  ?>" alt="User Image" style="width:160px;height:160px;"
                                  id="fotografia_usuario">
@@ -109,7 +109,6 @@
                                    required/><br/><br/>
                         </div>
 
-
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Actualizar Imagen</button>
                         </div>
@@ -117,9 +116,7 @@
                     </div>
 
                 </form>
-
             </div>
-
         </div>    <!-- end col mod 6 -->
 
 
@@ -132,8 +129,8 @@
 
                 <div id="notificacion_resul_fcp"></div>
                 <!-- form start -->
-                <form method="post" id="f_cambiar_password" class="form_entrada" action="cambiar_password">
-                    <input type="hidden" name="id_usuario_password" value="">
+                <form method="post" id="f_cambiar_password" class="formentrada" action="cambiar_password">
+                    <input type="hidden" name="id_usuario_password" value="{{ $usuario->id }}">
                     <input type="hidden" name="_token" id="_token" value="<?= csrf_token(); ?>">
                     <div class="box-body">
                         <div class="form-group">
@@ -146,12 +143,10 @@
                             <input type="password" class="form-control" id="password_usuario" name="password_usuario"
                                    placeholder="Password">
                         </div>
-
-
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Cambiar Datos</button>
+                        <button type="submit" class="btn btn-primary">Cambiar Password</button>
                     </div>
                 </form>
             </div>

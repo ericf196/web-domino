@@ -1,242 +1,328 @@
-function  verinfo_usuario(arg){
+function verinfo_usuario(arg) {
 
 
-	var urlraiz=$("#url_raiz_proyecto").val();
-	var miurl =urlraiz+"/form_editar_usuario/"+arg+"";
-	$("#capa_modal").show();
-	$("#capa_formularios").show();
-	var screenTop = $(document).scrollTop();
-	$("#capa_formularios").css('top', screenTop);
-  $("#capa_formularios").html($("#cargador_empresa").html());
+    var urlraiz = $("#url_raiz_proyecto").val();
+    var miurl = urlraiz + "/form_editar_usuario/" + arg + "";
+    $("#capa_modal").show();
+    $("#capa_formularios").show();
+    var screenTop = $(document).scrollTop();
+    $("#capa_formularios").css('top', screenTop);
+    $("#capa_formularios").html($("#cargador_empresa").html());
 
     $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-     $("#capa_formularios").html(resul);
+        url: miurl
+    }).done(function (resul) {
+        $("#capa_formularios").html(resul);
 
-    }).fail( function()
-   {
-    $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
-   }) ;
+    }).fail(function () {
+        $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+    });
 
 }
 
-function  verinfo_league(arg){
+function verinfo_league(arg) {
 
 
-  var urlraiz=$("#url_raiz_proyecto").val();
-  var miurl =urlraiz+"/form_editar_league/"+arg+"";
-  $("#capa_modal").show();
-  $("#capa_formularios").show();
-  var screenTop = $(document).scrollTop();
-  $("#capa_formularios").css('top', screenTop);
-  $("#capa_formularios").html($("#cargador_empresa").html());
+    var urlraiz = $("#url_raiz_proyecto").val();
+    var miurl = urlraiz + "/form_editar_league/" + arg + "";
+    $("#capa_modal").show();
+    $("#capa_formularios").show();
+    var screenTop = $(document).scrollTop();
+    $("#capa_formularios").css('top', screenTop);
+    $("#capa_formularios").html($("#cargador_empresa").html());
 
     $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-     $("#capa_formularios").html(resul);
+        url: miurl
+    }).done(function (resul) {
+        $("#capa_formularios").html(resul);
 
-    }).fail( function()
-   {
-    $("#capa_formularios").html('<span>... Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
-   }) ;
+    }).fail(function () {
+        $("#capa_formularios").html('<span>... Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+    });
 
 }
 
 
-$(document).on("click",".div_modal", function(e){
-	$(this).hide();
-	$("#capa_formularios").hide();
-	$("#capa_formularios").html("");
+$(document).on("click", ".div_modal", function (e) {
+    $(this).hide();
+    $("#capa_formularios").hide();
+    $("#capa_formularios").html("");
 })
 
 
-function cargar_formulario(arg){
-   var urlraiz=$("#url_raiz_proyecto").val();
-   $("#capa_modal").show();
-   $("#capa_formularios").show();
-   var screenTop = $(document).scrollTop();
-   $("#capa_formularios").css('top', screenTop);
-   $("#capa_formularios").html($("#cargador_empresa").html());
-   if(arg==1){ var miurl=urlraiz+"/form_nuevo_usuario"; }
-   if(arg==2){ var miurl=urlraiz+"/form_nuevo_rol"; }
-   if(arg==3){ var miurl=urlraiz+"/form_nuevo_permiso"; }
-   if(arg==4){ var miurl=urlraiz+"/form_nuevo_liga"; }
-    if(arg==5){ var miurl=urlraiz+"/form_editar_perfil"; }
-
-    $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-     $("#capa_formularios").html(resul);
-
-    }).fail( function()
-   {
-    $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
-   }) ;
-
-}
-
-
-$(document).on("submit",".formentrada",function(e){
-  e.preventDefault();
-  var quien=$(this).attr("id");
-  var formu=$(this);
-  var varurl="";
-  if(quien=="f_crear_usuario"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  if(quien=="f_crear_rol"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  if(quien=="f_crear_permiso"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  if(quien=="f_editar_usuario"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E2";  }
-  if(quien=="f_editar_acceso"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E3";  }
-  if(quien=="f_editar_league"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E2";  }
-  if(quien=="f_borrar_usuario"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  if(quien=="f_asignar_permiso"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  if(quien=="f_crear_liga"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-
-
-    if(quien=="f_editar_perfil"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-
-  $("#"+div_resul+"").html( $("#cargador_empresa").html());
-
-  $.ajax({
-    // la URL para la petición
-    url : varurl,
-    data : formu.serialize(),
-    type : 'POST',
-    dataType : 'html',
-
-    success : function(resul) {
-      $("#"+div_resul+"").html(resul);
-
-    },
-    error : function(xhr, status) {
-        $("#"+div_resul+"").html('Ha ocurrido un error, revise su conexion e intentelo nuevamente');
+function cargar_formulario(arg) {
+    var urlraiz = $("#url_raiz_proyecto").val();
+    $("#capa_modal").show();
+    $("#capa_formularios").show();
+    var screenTop = $(document).scrollTop();
+    $("#capa_formularios").css('top', screenTop);
+    $("#capa_formularios").html($("#cargador_empresa").html());
+    if (arg == 1) {
+        var miurl = urlraiz + "/form_nuevo_usuario";
+    }
+    if (arg == 2) {
+        var miurl = urlraiz + "/form_nuevo_rol";
+    }
+    if (arg == 3) {
+        var miurl = urlraiz + "/form_nuevo_permiso";
+    }
+    if (arg == 4) {
+        var miurl = urlraiz + "/form_nuevo_liga";
+    }
+    if (arg == 5) {
+        var miurl = urlraiz + "/form_editar_perfil";
+    }
+    if (arg == 6) {
+        var miurl = urlraiz + "/form_nuevo_noticia";
     }
 
-  });
+    $.ajax({
+        url: miurl
+    }).done(function (resul) {
+        $("#capa_formularios").html(resul);
+
+    }).fail(function () {
+        $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+    });
+
+}
+
+
+$(document).on("submit", ".formentrada", function (e) {
+    e.preventDefault();
+    var quien = $(this).attr("id");
+    var formu = $(this);
+    var varurl = "";
+    if (quien == "f_crear_usuario") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    if (quien == "f_crear_rol") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    if (quien == "f_crear_permiso") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    if (quien == "f_editar_usuario") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_E2";
+    }
+    if (quien == "f_editar_acceso") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_E3";
+    }
+    if (quien == "f_editar_league") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_E2";
+    }
+    if (quien == "f_borrar_usuario") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    if (quien == "f_asignar_permiso") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    if (quien == "f_crear_liga") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    
+    if (quien == "f_editar_perfil") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+    }
+    if (quien == "f_cambiar_password") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_resul_fcp";
+    }
+    if (quien == "f_editar_perfil") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_resul_feu";
+    }
+
+
+    $("#" + div_resul + "").html($("#cargador_empresa").html());
+
+    $.ajax({
+        // la URL para la petición
+        url: varurl,
+        data: formu.serialize(),
+        type: 'POST',
+        dataType: 'html',
+
+        success: function (resul) {
+            $("#" + div_resul + "").html(resul);
+
+        },
+        error: function (xhr, status) {
+            $("#" + div_resul + "").html('Ha ocurrido un error, revise su conexion e intentelo nuevamente');
+        }
+
+    });
 
 
 })
 
 
-function asignar_rol(idusu){
-   var idrol=$("#rol1").val();
-   var urlraiz=$("#url_raiz_proyecto").val();
-   $("#zona_etiquetas_roles").html($("#cargador_empresa").html());
-   var miurl=urlraiz+"/asignar_rol/"+idusu+"/"+idrol+"";
+function asignar_rol(idusu) {
+    var idrol = $("#rol1").val();
+    var urlraiz = $("#url_raiz_proyecto").val();
+    $("#zona_etiquetas_roles").html($("#cargador_empresa").html());
+    var miurl = urlraiz + "/asignar_rol/" + idusu + "/" + idrol + "";
 
     $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-      var etiquetas="";
-      var roles=$.parseJSON(resul);
-      $.each(roles,function(index, value) {
-        etiquetas+= '<span class="label label-warning">'+value+'</span> ';
-      })
+        url: miurl
+    }).done(function (resul) {
+        var etiquetas = "";
+        var roles = $.parseJSON(resul);
+        $.each(roles, function (index, value) {
+            etiquetas += '<span class="label label-warning">' + value + '</span> ';
+        })
 
-     $("#zona_etiquetas_roles").html(etiquetas);
+        $("#zona_etiquetas_roles").html(etiquetas);
 
-    }).fail( function()
-    {
-    $("#zona_etiquetas_roles").html('<span style="color:red;">...Error: Aun no ha agregado roles o revise su conexion...</span>');
-    }) ;
+    }).fail(function () {
+        $("#zona_etiquetas_roles").html('<span style="color:red;">...Error: Aun no ha agregado roles o revise su conexion...</span>');
+    });
 
 }
 
 
-function quitar_rol(idusu){
-   var idrol=$("#rol2").val();
-   var urlraiz=$("#url_raiz_proyecto").val();
-   $("#zona_etiquetas_roles").html($("#cargador_empresa").html());
-   var miurl=urlraiz+"/quitar_rol/"+idusu+"/"+idrol+"";
+function quitar_rol(idusu) {
+    var idrol = $("#rol2").val();
+    var urlraiz = $("#url_raiz_proyecto").val();
+    $("#zona_etiquetas_roles").html($("#cargador_empresa").html());
+    var miurl = urlraiz + "/quitar_rol/" + idusu + "/" + idrol + "";
 
     $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-      var etiquetas="";
-      var roles=$.parseJSON(resul);
-      $.each(roles,function(index, value) {
-        etiquetas+= '<span class="label label-warning" style="margin-left:10px;" >'+value+'</span> ';
-      })
+        url: miurl
+    }).done(function (resul) {
+        var etiquetas = "";
+        var roles = $.parseJSON(resul);
+        $.each(roles, function (index, value) {
+            etiquetas += '<span class="label label-warning" style="margin-left:10px;" >' + value + '</span> ';
+        })
 
-     $("#zona_etiquetas_roles").html(etiquetas);
+        $("#zona_etiquetas_roles").html(etiquetas);
 
-    }).fail( function()
-    {
-    $("#zona_etiquetas_roles").html('<span style="color:red;">...Error: Aun no ha agregado roles  o revise su conexion...</span>');
-    }) ;
+    }).fail(function () {
+        $("#zona_etiquetas_roles").html('<span style="color:red;">...Error: Aun no ha agregado roles  o revise su conexion...</span>');
+    });
 
 }
 
 
-function borrado_usuario(idusu){
+function borrado_usuario(idusu) {
 
-   var urlraiz=$("#url_raiz_proyecto").val();
-   $("#capa_modal").show();
-   $("#capa_formularios").show();
-   var screenTop = $(document).scrollTop();
-   $("#capa_formularios").css('top', screenTop);
-   $("#capa_formularios").html($("#cargador_empresa").html());
-   var miurl=urlraiz+"/form_borrado_usuario/"+idusu+"";
+    var urlraiz = $("#url_raiz_proyecto").val();
+    $("#capa_modal").show();
+    $("#capa_formularios").show();
+    var screenTop = $(document).scrollTop();
+    $("#capa_formularios").css('top', screenTop);
+    $("#capa_formularios").html($("#cargador_empresa").html());
+    var miurl = urlraiz + "/form_borrado_usuario/" + idusu + "";
 
 
     $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-     $("#capa_formularios").html(resul);
+        url: miurl
+    }).done(function (resul) {
+        $("#capa_formularios").html(resul);
 
-    }).fail( function()
-   {
-    $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
-   }) ;
+    }).fail(function () {
+        $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+    });
 
 
 }
 
 
-function borrar_permiso(idrol,idper){
+function borrar_permiso(idrol, idper) {
 
-     var urlraiz=$("#url_raiz_proyecto").val();
-     var miurl=urlraiz+"/quitar_permiso/"+idrol+"/"+idper+"";
-     $("#filaP_"+idper+"").html($("#cargador_empresa").html() );
-        $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-     $("#filaP_"+idper+"").hide();
+    var urlraiz = $("#url_raiz_proyecto").val();
+    var miurl = urlraiz + "/quitar_permiso/" + idrol + "/" + idper + "";
+    $("#filaP_" + idper + "").html($("#cargador_empresa").html());
+    $.ajax({
+        url: miurl
+    }).done(function (resul) {
+        $("#filaP_" + idper + "").hide();
 
-    }).fail( function()
-   {
-     alert("No se borro correctamente, intentalo nuevamente o revisa tu conexion");
-   }) ;
+    }).fail(function () {
+        alert("No se borro correctamente, intentalo nuevamente o revisa tu conexion");
+    });
 
+
+}
+
+function borrar_rol(idrol) {
+
+    var urlraiz = $("#url_raiz_proyecto").val();
+    var miurl = urlraiz + "/borrar_rol/" + idrol + "";
+    $("#filaR_" + idrol + "").html($("#cargador_empresa").html());
+    $.ajax({
+        url: miurl
+    }).done(function (resul) {
+        $("#filaR_" + idrol + "").hide();
+
+    }).fail(function () {
+        alert("No se borro correctamente, intentalo nuevamente o revisa tu conexion");
+    });
 
 
 }
 
 
-function borrar_rol(idrol){
+$(document).on("submit", ".formarchivo", function (e) {
 
-     var urlraiz=$("#url_raiz_proyecto").val();
-     var miurl=urlraiz+"/borrar_rol/"+idrol+"";
-     $("#filaR_"+idrol+"").html($("#cargador_empresa").html() );
-        $.ajax({
-    url: miurl
-    }).done( function(resul)
-    {
-     $("#filaR_"+idrol+"").hide();
+    e.preventDefault();
+    var nombreform = $(this).attr("id");
+    if (nombreform == "f_subir_imagen") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_resul_fci";
+    }
+    //información del formulario
+    var formData = new FormData($("#" + nombreform + "")[0]);
 
-    }).fail( function()
-   {
-     alert("No se borro correctamente, intentalo nuevamente o revisa tu conexion");
-   }) ;
+    $.ajax({
+        url: varurl,
+        type: 'POST',
+        // Form data
+        data: formData,
+        //necesario para subir archivos via ajax
+        cache: false,
+        contentType: false,
+        processData: false,
+        //mientras enviamos el archivo
+        beforeSend: function () {
+            $("#" + div_resul + "").html($("#cargador_empresa").html());
+        },
+        //una vez finalizado correctamente
+        success: function (data) {
+            $("#" + div_resul + "").html(data);
+            $("#fotografia_usuario").attr('src', $("#fotografia_usuario").attr('src') + '?' + Math.random());
+        },
+        error: function (data) {
+            alert("ha ocurrido un error");
 
+        }
+    });
+});
 
+    $("input[id=archivo]").change(function () {
+        console.log(this);
+        console.log(this.files[0]);
+        console.log("change");
+        /*if (this.files && this.files[0]) {
+         var reader = new FileReader();
 
-}
+         reader.onload = function (e) {
+         $('#picture_image')
+         .attr('src', e.target.result)
+         };
+
+         reader.readAsDataURL(this.files[0]);
+         }*/
+    });
+

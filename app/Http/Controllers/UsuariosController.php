@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
+use Intervention\Image\Facades\Image;
 
 class UsuariosController extends Controller
 {
@@ -66,7 +69,7 @@ class UsuariosController extends Controller
     {
         //$userLeague = Auth::user()->league_id;
         $userId = Auth::user()->id;
-        $league=League::where('user_id', '=', $userId)->first();
+        $league = League::where('user_id', '=', $userId)->first();
         $userLeagueEmail = Auth::user()->email;
         $players = User::where([['league_id', '=', $league->id], ['email', '<>', $userLeagueEmail]])->paginate(100);
 
@@ -95,7 +98,7 @@ class UsuariosController extends Controller
         }
 
         $idUser = Auth::user()->id;
-        $idLeague=League::where('user_id','=',$idUser)->first()->id;
+        $idLeague = League::where('user_id', '=', $idUser)->first()->id;
 
         $usuario = new User;
         $usuario->name = strtoupper($request->input("nombres") . " " . $request->input("apellidos"));
@@ -165,9 +168,18 @@ class UsuariosController extends Controller
         $league->phone = $request->input("phone_league");
         $league->user_id = $userIdInclude;
 
+        $save = $save = $league->save();
+
+        $leagueId = League::where('email', '=', $request->input("email_league"))->first()->id;
+        $directory = 'img/league_' . $leagueId;
+
+        File::makeDirectory($directory, $mode = 0777, true, true);
+        File::makeDirectory($directory . '/users', $mode = 0777, true, true);
+        File::makeDirectory($directory . '/news', $mode = 0777, true, true);
 
         DB::commit();
-        if ($league->save()) {
+        if ($save) {
+
             return view("adminlte::mensajes.msj_usuario_creado")->with("msj", "Liga agregada correctamente");
         } else {
             return view("adminlte::mensajes.mensaje_error")->with("msj", "...Hubo un error al agregar Liga...");
@@ -233,12 +245,6 @@ class UsuariosController extends Controller
             ->with("roles", $roles);
     }
 
-    public function form_editar_perfil()
-    {
-        $usuario=Auth::user();
-        return view("adminlte::formularios.form_editar_perfil")->with('usuario', $usuario);
-
-    }
 
     public function editar_usuario(Request $request)
     {
@@ -454,9 +460,8 @@ class UsuariosController extends Controller
         $league = League::find($idleague);
 //        echo($league->categories()->wherePivot('category_id', '=', 3)->get());
 
-        foreach ($league->categories()->wherePivot('category_id', '=', 3)->get() as $category)
-        {
-            echo $category->users()->withPivot('jj','jg','jp','pts_p','pts_n','avg','efec','pro','pro_g','created_at')->get();
+        foreach ($league->categories()->wherePivot('category_id', '=', 3)->get() as $category) {
+            echo $category->users()->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'pro_g', 'created_at')->get();
         }
     }
 
@@ -465,5 +470,93 @@ class UsuariosController extends Controller
         return view("adminlte::mensajes.msj_usuario_creado");
     }
 
+    public function form_editar_perfil()
+    {
+        $usuario = Auth::user();
+        return view("adminlte::formularios.form_editar_perfil")->with('usuario', $usuario);
+
+    }
+
+    public function cambiar_password(Request $request)
+    {
+
+        $id = $request->input("id_usuario_password");
+        $email = $request->input("email_usuario");
+        $password = $request->input("password_usuario");
+        $usuario = User::find($id);
+        $usuario->email = $email;
+        $usuario->password = bcrypt($password);
+        $save = $usuario->save();
+
+        if ($save) {
+            return view("mensajes.msj_correcto")->with("msj", "Password actualizado correctamente");
+        } else {
+            return view("mensajes.msj_rechazado")->with("msj", "Error al actualizar el password");
+        }
+
+    }
+
+    public function cambiar_informacion(Request $request)
+    {
+
+        $id = $request->input("id_usuario");
+
+        $usuario = User::find($id);
+        $usuario->name = strtoupper($request->input("nombres") . " " . $request->input("apellidos"));
+        $usuario->nombres = strtoupper($request->input("nombres"));
+        $usuario->apellidos = strtoupper($request->input("apellidos"));
+        $usuario->cedula = $request->input("cedula");
+        $usuario->state = strtoupper($request->input("state"));
+        $usuario->city = strtoupper($request->input("city"));
+        $usuario->telefono = $request->input("telefono");
+        $usuario->association = strtoupper($request->input("association"));
+        $usuario->federation = strtoupper($request->input("federation"));
+        $usuario->team = strtoupper($request->input("team"));
+        $save = $usuario->save();
+
+        if ($save) {
+            return view("mensajes.msj_correcto")->with("msj", "Campos actualizado correctamente");
+        } else {
+            return view("mensajes.msj_rechazado")->with("msj", "Error al actualizar los campos");
+        }
+
+    }
+
+
+    public function subir_imagen_usuario(Request $request)
+    {
+        $id = $request->input('id_usuario_foto');
+        $archivo = $request->file('archivo');
+        $input = array('image' => $archivo);
+        $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:900');
+        $validacion = Validator::make($input, $reglas);
+        if ($validacion->fails()) {
+            return view("mensajes.msj_rechazado")->with("msj", "El archivo no es una imagen valida");
+        } else {
+            try {
+                $usuario = Auth::user();
+                $extension = $archivo->getClientOriginalExtension(); //formato (jpg,gif etc)
+
+                if ($usuario->league_id) {
+                    $directory = 'league_' . $usuario->league_id;
+
+                    $nuevo_nombre = "user_avatar_id_" . $id . "." . $extension;
+                    Image::make($request->file('archivo'))->resize(215, 214)->save('img/' . $directory . '/' . 'users/' . $nuevo_nombre);
+                    $usuario->url_image = 'img/' . $directory . '/' . 'users/' . $nuevo_nombre;
+                    $usuario->save();
+                    return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
+                } else {
+                    $nuevo_nombre = "user_avatar_id_" . $id . "." . $extension;
+                    Image::make($request->file('archivo'))->resize(215, 214)->save('img/' . $nuevo_nombre);
+                    $usuario->url_image = 'img/' . $nuevo_nombre;
+                    $usuario->save();
+                    return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
+                }
+            } catch (Exception $e) {
+                return view("mensajes.msj_rechazado")->with("msj", "Hubo un error al modificar la foto");
+            }
+
+        }
+    }
 
 }
