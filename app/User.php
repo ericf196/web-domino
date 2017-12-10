@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'league_id', 'nombres', 'apellidos', 'city', 'state', 'cedula', 'url_image', 'telefono', 'team', 'association',
     ];
 
     /**
@@ -37,9 +37,8 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'games','user_id','category_id');
+        return $this->belongsToMany(Category::class, 'games', 'user_id', 'category_id');
     }
-
 
 
 }

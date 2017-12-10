@@ -75,6 +75,9 @@ function cargar_formulario(arg) {
     if (arg == 6) {
         var miurl = urlraiz + "/form_nuevo_noticia";
     }
+    if (arg == 7) {
+        var miurl = urlraiz + "/form_nuevo_administrador";
+    }
 
     $.ajax({
         url: miurl
@@ -95,7 +98,7 @@ $(document).on("submit", ".formentrada", function (e) {
     var varurl = "";
     if (quien == "f_crear_usuario") {
         var varurl = $(this).attr("action");
-        var div_resul = "capa_formularios";
+        var div_resul = "notificacion_nuevo_ajax";
     }
     if (quien == "f_crear_rol") {
         var varurl = $(this).attr("action");
@@ -129,11 +132,11 @@ $(document).on("submit", ".formentrada", function (e) {
         var varurl = $(this).attr("action");
         var div_resul = "capa_formularios";
     }
-    
-    if (quien == "f_editar_perfil") {
+
+    /*if (quien == "f_editar_perfil") {
         var varurl = $(this).attr("action");
         var div_resul = "capa_formularios";
-    }
+    }*/
     if (quien == "f_cambiar_password") {
         var varurl = $(this).attr("action");
         var div_resul = "notificacion_resul_fcp";
@@ -142,9 +145,11 @@ $(document).on("submit", ".formentrada", function (e) {
         var varurl = $(this).attr("action");
         var div_resul = "notificacion_resul_feu";
     }
+    if (quien == "f_crear_administrador") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_resul_admin";
+    }
 
-
-    $("#" + div_resul + "").html($("#cargador_empresa").html());
 
     $.ajax({
         // la URL para la petición
@@ -153,12 +158,20 @@ $(document).on("submit", ".formentrada", function (e) {
         type: 'POST',
         dataType: 'html',
 
+        beforeSend: function () {
+            $("#" + div_resul + "").html($("#cargador_empresa").html());
+            $('button[type=submit]').attr("disabled", "disabled");
+        },
+
         success: function (resul) {
             $("#" + div_resul + "").html(resul);
-
         },
         error: function (xhr, status) {
             $("#" + div_resul + "").html('Ha ocurrido un error, revise su conexion e intentelo nuevamente');
+        },
+        complete: function () {
+            $('button[type=submit]').removeAttr("disabled");
+           /* $("#" + quien)[0].reset();*/
         }
 
     });
@@ -301,7 +314,7 @@ $(document).on("submit", ".formarchivo", function (e) {
         //una vez finalizado correctamente
         success: function (data) {
             $("#" + div_resul + "").html(data);
-            $("#fotografia_usuario").attr('src', $("#fotografia_usuario").attr('src') + '?' + Math.random());
+            /*$("#fotografia_usuario").attr('src', $("#fotografia_usuario").attr('src') + '?' + Math.random());*/
         },
         error: function (data) {
             alert("ha ocurrido un error");
@@ -310,19 +323,80 @@ $(document).on("submit", ".formarchivo", function (e) {
     });
 });
 
-    $("input[id=archivo]").change(function () {
-        console.log(this);
-        console.log(this.files[0]);
-        console.log("change");
-        /*if (this.files && this.files[0]) {
-         var reader = new FileReader();
+$("input[id=archivo]").change(function () {
+    console.log(this);
+    console.log(this.files[0]);
+    console.log("change");
+    /*if (this.files && this.files[0]) {
+     var reader = new FileReader();
 
-         reader.onload = function (e) {
-         $('#picture_image')
-         .attr('src', e.target.result)
-         };
+     reader.onload = function (e) {
+     $('#picture_image')
+     .attr('src', e.target.result)
+     };
 
-         reader.readAsDataURL(this.files[0]);
-         }*/
+     reader.readAsDataURL(this.files[0]);
+     }*/
+});
+
+
+$(document).on("submit", ".formentrada_noticias_liga", function (e) {
+    e.preventDefault();
+    var quien = $(this).attr("id");
+    var formu = $(this);
+    var varurl = "";
+    if (quien == "f_nuevo_noticia") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_nuevo_noticia";
+        $("#submit_noticias_crear").attr("disabled", "disabled");
+    }
+    /*if (quien == "f_crear_liga") {
+        var varurl = $(this).attr("action");
+        var div_resul = "capa_formularios";
+        $("#submit_liga_crear").attr("disabled", "disabled");
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('input[name="_token"]').val()
+            }
+        });
+    }*/
+
+    //información del formulario
+
+    var formData = new FormData($("#" + quien + "")[0]);
+
+
+    $.ajax({
+        url: varurl,
+        type: 'POST',
+        // Form data
+        data: formData,
+        //necesario para subir archivos via ajax
+        cache: false,
+        contentType: false,
+        processData: false,
+        //mientras enviamos el archivo
+        beforeSend: function () {
+            $("#" + div_resul + "").html($("#cargador_empresa").html());
+        },
+        //una vez finalizado correctamente
+        success: function (data) {
+            $("#" + div_resul + "").html(data);
+
+            if (quien == "f_nuevo_noticia") {
+                $("#submit_noticias").removeAttr("disabled");
+            } /*else if (quien == "f_crear_liga") {
+                $("#submit_liga_crear").removeAttr("disabled");
+            }*/
+
+            /* $("#fotografia_usuario").attr('src', $("#fotografia_usuario").attr('src') + '?' + Math.random());*/
+        },
+        error: function (data) {
+            alert("ha ocurrido un error" + data);
+
+        }
     });
+
+})
 

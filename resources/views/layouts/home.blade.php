@@ -111,13 +111,15 @@
 </footer>
 
 
-		<script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/wow.js"></script>
-    <script src="js/wow-custom.js"></script>
-    <script src="js/desplazamiento-scroll.js"></script>
-    <script src="js/affix-fixed-sticky.js"></script>
+		<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{asset('js/tether.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/wow.js')}}"></script>
+    <script src="{{asset('js/wow-custom.js')}}"></script>
+    <script src="{{asset('js/desplazamiento-scroll.js')}}"></script>
+    <script src="{{asset('js/affix-fixed-sticky.js')}}"></script>
+
+
     <script type="text/javascript"> //parallax
         (function(){
           var parallax = document.querySelectorAll(".parallax"),
@@ -131,15 +133,6 @@
           };
 
         })();
-    </script>
-    <script type="text/javascript">//productos
-        function circleMas($varCM){
-            if ($("#text-card-producto"+$varCM).hasClass('text-card-producto')) {
-                    $("#text-card-producto"+$varCM).removeClass('text-card-producto').addClass('text-card-producto-comp');
-                }else if($("#text-card-producto"+$varCM).hasClass('text-card-producto-comp')) {
-                    $("#text-card-producto"+$varCM).removeClass('text-card-producto-comp').addClass('text-card-producto');
-                }
-        }
     </script>
 
     </body>

@@ -17,7 +17,6 @@ use Intervention\Image\Facades\Image;
 class UsuariosController extends Controller
 {
 
-
     public function form_nuevo_usuario()
     {
         //carga el formulario para agregar un nuevo usuario
@@ -121,19 +120,22 @@ class UsuariosController extends Controller
         $rolIdInclude->roles()->attach(3);
 
         if ($save) {
-            return view("adminlte::mensajes.msj_usuario_creado")->with("msj", "Usuario agregado correctamente");
+            return view("mensajes.msj_correcto")->with("msj", "Usuario agregado correctamente");
         } else {
-            return view("adminlte::mensajes.mensaje_error")->with("msj", "...Hubo un error al agregar ;...");
+            return view("mensajes.msj_rechazado")->with("msj", "...Hubo un error al agregar ;...");
         }
 
     }
 
 
-    public function crear_liga(Request $request)
+    public function crear_administrador(Request $request)
     {
-        $reglas = ['email' => 'required|email|unique:leagues'];
+        $reglas = ['password' => 'required|min:8|confirmed',
+            'email' => 'required|email|unique:users'];
 
-        $mensajes = ['email.unique' => 'El email ya se encuentra registrado en la base de datos',];
+        $mensajes = ['password.min' => 'El password debe tener al menos 8 caracteres',
+            'email.unique' => 'El email ya se encuentra registrado en la base de datos',
+            'password.confirmed' => 'Su password no coincide',];
 
         $validator = Validator::make($request->all(), $reglas, $mensajes);
         if ($validator->fails()) {
@@ -141,48 +143,118 @@ class UsuariosController extends Controller
                 ->withErrors($validator->errors());
         }
 
-        DB::beginTransaction();
+        /*$idUser = Auth::user()->id;
+        $idLeague = League::where('user_id', '=', $idUser)->first()->id;*/
+
         $usuario = new User;
-        $usuario->name = strtoupper($request->input("name") . " " . $request->input("apellido"));
-        $usuario->nombres = strtoupper($request->input("name"));
-        $usuario->apellidos = strtoupper($request->input("apellido"));
+        $usuario->name = strtoupper($request->input("nombres") . " " . $request->input("apellidos"));
+        $usuario->nombres = strtoupper($request->input("nombres"));
+        $usuario->apellidos = strtoupper($request->input("apellidos"));
+        $usuario->cedula = $request->input("cedula");
+        $usuario->state = strtoupper($request->input("state"));
+        $usuario->city = strtoupper($request->input("city"));
         $usuario->telefono = $request->input("phone");
+        $usuario->association = strtoupper($request->input("association"));
+        $usuario->federation = strtoupper($request->input("federation"));
+        $usuario->team = strtoupper($request->input("team"));
         $usuario->email = $request->input("email");
         $usuario->password = bcrypt($request->input("password"));
         $usuario->league_id = 0;
-        $usuario->save();
-
+        $save = $usuario->save();
         $userIdInclude = User::where('email', '=', $request->input("email"))->first()->id;
 
         $rolIdInclude = User::find($userIdInclude);
-        $rolIdInclude->roles()->attach(2);
+        $rolIdInclude->roles()->attach(1);
 
-        $league = new League();
-        $league->name_league = strtoupper($request->input("name_league"));
-        $league->description = strtoupper($request->input("description_league"));
-        $league->state = strtoupper($request->input("state_league"));
-        $league->city = strtoupper($request->input("city_league"));
-        $league->address = strtoupper($request->input("address_league"));
-        $league->name_admin = strtoupper($request->input("name_admin"));
-        $league->email = $request->input("email_league");
-        $league->phone = $request->input("phone_league");
-        $league->user_id = $userIdInclude;
-
-        $save = $save = $league->save();
-
-        $leagueId = League::where('email', '=', $request->input("email_league"))->first()->id;
-        $directory = 'img/league_' . $leagueId;
-
-        File::makeDirectory($directory, $mode = 0777, true, true);
-        File::makeDirectory($directory . '/users', $mode = 0777, true, true);
-        File::makeDirectory($directory . '/news', $mode = 0777, true, true);
-
-        DB::commit();
         if ($save) {
-
-            return view("adminlte::mensajes.msj_usuario_creado")->with("msj", "Liga agregada correctamente");
+            return view("adminlte::mensajes.msj_usuario_creado")->with("msj", "Usuario agregado correctamente");
         } else {
-            return view("adminlte::mensajes.mensaje_error")->with("msj", "...Hubo un error al agregar Liga...");
+            return view("adminlte::mensajes.mensaje_error")->with("msj", "...Hubo un error al agregar ;...");
+        }
+
+    }
+    public function form_nuevo_administrador()
+    {
+        //carga el formulario para agregar un nuevo usuario
+        $roles = Role::all();
+        return view("adminlte::formularios.form_nuevo_administrador")->with("roles", $roles);
+
+    }
+
+
+    public function crear_liga(Request $request)
+    {
+
+        /*$reglas = ['email' => 'required|email|unique:leagues', 'image_liga' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:900'];
+
+        $mensajes = ['email.unique' => 'El email ya se encuentra registrado en la base de datos', 'image_liga.mimes' => 'La imagen no es valida',];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+        if ($validator->fails()) {
+            return view("adminlte::mensajes.mensaje_error")->with("msj", "...Existen errores...")
+                ->withErrors($validator->errors());
+        }*/
+
+        DB::beginTransaction();
+
+        try {
+            $usuario = new User;
+            $usuario->name = strtoupper($request->get("name") . " " . $request->get("apellido"));
+            $usuario->nombres = strtoupper($request->get("name"));
+            $usuario->apellidos = strtoupper($request->get("apellido"));
+            $usuario->telefono = $request->get("phone");
+            $usuario->password = bcrypt($request->get("password"));
+            $usuario->city = strtoupper($request->get("city"));
+            $usuario->state = strtoupper($request->get("state"));
+            $usuario->cedula = $request->get("cedula");
+            $usuario->email = $request->get("email");
+            $usuario->league_id = 0;
+
+            $usuario->save();
+
+            $userIdInclude = User::where('email', '=', $request->get("email"))->first()->id;
+
+            $rolIdInclude = User::find($userIdInclude);
+            $rolIdInclude->roles()->attach(2);
+
+            $league = new League();
+            $league->name_league = strtoupper($request->get("name_league"));
+            $league->description = strtoupper($request->get("description_league"));
+            $league->state = strtoupper($request->get("state_league"));
+            $league->city = strtoupper($request->get("city_league"));
+            $league->address = strtoupper($request->get("address_league"));
+            $league->name_admin = strtoupper($request->get("name_admin"));
+            $league->email = $request->get("email_league");
+            $league->phone = $request->get("phone_league");
+            $league->user_id = $userIdInclude;
+            $league->save();
+
+            /*$archivo = $request->file('image_liga');*/
+
+            $leagueId = League::where('email', '=', $request->get("email_league"))->first()->id;
+
+            $directory = 'img/league_' . $leagueId;
+
+            File::makeDirectory($directory, $mode = 0777, true, true);
+            File::makeDirectory($directory . '/users', $mode = 0777, true, true);
+            File::makeDirectory($directory . '/news', $mode = 0777, true, true);
+            File::makeDirectory($directory . '/logo', $mode = 0777, true, true);
+            File::makeDirectory($directory . '/publicity', $mode = 0777, true, true);
+
+            /*$extension = $archivo->getClientOriginalExtension();*/ //formato (jpg,gif etc)
+            /*$imagen_nombre = "logo_id_" . $leagueId . "." . $extension;
+            Image::make($archivo)->resize(301, 301)->save('img/league_' . $leagueId . '/logo/' . $imagen_nombre);*/
+
+            /*$league=League::find($leagueId);
+            $url_logo_liga = $league->url_logo = 'img/league_' . $leagueId . '/logo/' . $imagen_nombre;
+            $league->save();*/
+
+            DB::commit();
+
+            return view("mensajes.msj_correcto")->with("msj", "Liga agregada correctamente"); // el with esta de prueba a ver si se puede tener el la url y meterla el donde va la imagen
+
+        } catch (Exception $e) {
+            return view("mensajes.msj_rechazado")->with("msj", "Error al agregar liga");
         }
 
     }
@@ -344,7 +416,7 @@ class UsuariosController extends Controller
     public function buscar_league(Request $request)
     {
         $dato = $request->input("dato_buscado1");
-        $leagues = Leagues::where("name_league", "like", "%" . $dato . "%")->orwhere("description", "like", "%" . $dato . "%")->paginate(100);
+        $leagues = League::where("name_league", "like", "%" . $dato . "%")->orwhere("description", "like", "%" . $dato . "%")->paginate(100);
         return view('vendor.adminlte.listados.listado_usuarios')->with("leagues", $leagues);
     }
 
@@ -444,26 +516,6 @@ class UsuariosController extends Controller
         return "ok";
     }
 
-    public function all()
-    {
-        // Auth::user()->id; // Adminsitrador de liga
-        /*$prueba=User::find(3)->league;
-        echo($prueba);
-        $prueba=User::find(4)->categories()->withPivot('jj ', 'jg','jp','pts_p','pts_n ','avg ','efec','pro','pro_g ')->get();
-        echo($prueba);*/
-
-        /*$idleague = 10;
-        $league = League::find($idleague);
-        echo($league->user);*/
-
-        $idleague = 2;
-        $league = League::find($idleague);
-//        echo($league->categories()->wherePivot('category_id', '=', 3)->get());
-
-        foreach ($league->categories()->wherePivot('category_id', '=', 3)->get() as $category) {
-            echo $category->users()->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'pro_g', 'created_at')->get();
-        }
-    }
 
     public function editar_perfil()
     {
@@ -519,12 +571,12 @@ class UsuariosController extends Controller
         } else {
             return view("mensajes.msj_rechazado")->with("msj", "Error al actualizar los campos");
         }
-
     }
 
 
     public function subir_imagen_usuario(Request $request)
     {
+
         $id = $request->input('id_usuario_foto');
         $archivo = $request->file('archivo');
         $input = array('image' => $archivo);
@@ -546,9 +598,12 @@ class UsuariosController extends Controller
                     $usuario->save();
                     return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
                 } else {
-                    $nuevo_nombre = "user_avatar_id_" . $id . "." . $extension;
-                    Image::make($request->file('archivo'))->resize(215, 214)->save('img/' . $nuevo_nombre);
-                    $usuario->url_image = 'img/' . $nuevo_nombre;
+
+                    $leagueId = League::where('user_id', '=', $usuario->id)->first()->id;
+
+                    $nuevo_nombre = "admin_avatar_id_" . $id . "." . $extension;
+                    Image::make($request->file('archivo'))->resize(215, 214)->save('img/league_' . $leagueId .'/users/' . $nuevo_nombre);
+                    $usuario->url_image = 'img/league_' . $leagueId .'/users/' . $nuevo_nombre;
                     $usuario->save();
                     return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
                 }
@@ -557,6 +612,29 @@ class UsuariosController extends Controller
             }
 
         }
+    }
+
+    public function all()
+    {
+        // Auth::user()->id; // Adminsitrador de liga
+        /*$prueba=User::find(3)->league;
+        echo($prueba);
+        $prueba=User::find(4)->categories()->withPivot('jj ', 'jg','jp','pts_p','pts_n ','avg ','efec','pro','pro_g ')->get();
+        echo($prueba);*/
+
+        /*$idleague = 10;
+        $league = League::find($idleague);
+        echo($league->user);*/
+
+        /*$idleague = 2;
+        $league = League::find($idleague);*/
+//        echo($league->categories()->wherePivot('category_id', '=', 3)->get());
+
+        /*foreach ($league->categories()->wherePivot('category_id', '=', 3)->get() as $category) {
+            echo $category->users()->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'pro_g', 'created_at')->get();
+        }*/
+
+        echo "test";
     }
 
 }

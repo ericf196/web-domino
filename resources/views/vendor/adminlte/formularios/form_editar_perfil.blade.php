@@ -4,7 +4,7 @@
 
         <div class="col-md-6">
 
-            <div class="box box-primary">
+            <div class="box box-primary box-gris">
 
                 <div class="box-header">
                     <h3 class="box-title">Editar información del Usuario</h3>
@@ -66,10 +66,13 @@
                             <input type="text" class="form-control" id="association" name="association"
                                    value="{{ $usuario->association }}">
                         </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                        </div>
+
                     </div>
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Actualizar Datos</button>
-                    </div>
+
                 </form>
             </div>
 
@@ -77,7 +80,7 @@
 
         <div class="col-md-6">
 
-            <div class="box box-primary">
+            <div class="box box-primary box-gris">
                 <div class="box-header">
                     <h3 class="box-title">Cambiar Fotografia</h3>
                 </div><!-- /.box-header -->
@@ -92,43 +95,46 @@
 
                     <div class="box-body">
 
-                        <div class="form-group col-xs-12">
+                        <div class="form-group">
 
                             <?php if ($usuario->url_image == "") {
                                 $usuario->url_image = "img/avatar.jpg";
                             }  ?>
-                            <img src="<?=  $usuario->url_image;  ?>" alt="User Image" style="width:160px;height:160px;"
+                            <img src="<?=  $usuario->url_image;  ?>" alt="User Image"
+                                 style="width:160px;height:160px;"
                                  id="fotografia_usuario">
                             <!-- User image -->
 
                         </div>
 
-                        <div class="form-group col-xs-12">
+                        <div class="form-group">
                             <label>Agregar Imagen </label>
                             <input name="archivo" id="archivo" type="file" class="archivo form-control"
+                                   onchange="document.getElementById('fotografia_usuario').src = window.URL.createObjectURL(this.files[0])"
                                    required/><br/><br/>
                         </div>
 
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Actualizar Imagen</button>
-                        </div>
+
+                        <button type="submit" class="btn btn-primary">Actualizar Imagen</button>
 
                     </div>
 
                 </form>
+
             </div>
         </div>    <!-- end col mod 6 -->
 
 
         <div class="col-md-6">
 
-            <div class="box box-primary">
+            <div class="box box-primary box-gris">
                 <div class="box-header with-border">
                     <h3 class="box-title">Cambiar Password</h3>
                 </div><!-- /.box-header -->
 
                 <div id="notificacion_resul_fcp"></div>
                 <!-- form start -->
+
                 <form method="post" id="f_cambiar_password" class="formentrada" action="cambiar_password">
                     <input type="hidden" name="id_usuario_password" value="{{ $usuario->id }}">
                     <input type="hidden" name="_token" id="_token" value="<?= csrf_token(); ?>">
@@ -140,14 +146,16 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="password_usuario" name="password_usuario"
+                            <input type="password" class="form-control" id="password_usuario"
+                                   name="password_usuario"
                                    placeholder="Password">
+                        </div>
+                        <div class="pt-4">
+                            <button  type="submit" class="btn btn-primary ">Cambiar Password</button>
                         </div>
                     </div><!-- /.box-body -->
 
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Cambiar Password</button>
-                    </div>
+
                 </form>
             </div>
 

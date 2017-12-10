@@ -50,39 +50,47 @@
 
         </div>
 
-        <div class="table-responsive">
 
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="box-body box-white">
 
+            <div class="table-responsive">
+
+                <table class="table table-hover table-striped" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Titulo</th>
+                        <th>Descripcion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($noticias as $noticia)
+                        <tr role="row" class="odd">
+                            <td>{{ $noticia->id }}</td>
+                            {{--<td class="mailbox-messages mailbox-name">
+                                <div class="enlaceJs" onclick="verinfo_usuario({{  $noticia->id }})"
+                                     style="display:block"><i
+                                            class="fa fa-user"></i>&nbsp;&nbsp;{{ $noticia->name  }}</div>
+                            </td>--}}
+                            <td>{{ $noticia->title }}</td>
+                            <td>{{ $noticia->description }}</td>
+                            <td>
+
+                                <button type="button" class="btn  btn-default btn-xs"
+                                        onclick="verinfo_usuario({{  $noticia->id }})" disabled><i
+                                            class="fa fa-fw fa-edit"></i></button>
+                                <button type="button" class="btn  btn-danger btn-xs"
+                                        onclick="borrado_usuario({{  $noticia->id }});" disabled><i
+                                            class="fa fa-fw fa-remove"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+
+            </div>
         </div>
 
     </section>

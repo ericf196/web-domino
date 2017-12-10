@@ -30,6 +30,8 @@
 
 
                 <div class="margin" id="botones_control">
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(7);">Agregar
+                        Administrador</a>
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar
                         Jugador</a>
                     <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Jugadores</a>
@@ -39,6 +41,7 @@
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);">Permisos</a>
                     @endrole
                 </div>
+
 
             </div>
 
@@ -112,6 +115,8 @@
             @endif
 
             @endrole
+
+
 
 
             <!--panel ligas-->

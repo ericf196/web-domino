@@ -23,11 +23,10 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function estado()
+    public function estado($estado)
     {
-        /*dd($estado);*/
-        $league = League::where('state', '=', 'LARA');
-        return view('web.estado');
+        $leagues = League::where('state', '=', 'LARA')->get();
+        return view('web.estado')->with('leagues',$leagues);
     }
 
     /**

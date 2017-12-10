@@ -80,6 +80,8 @@
 
             @endrole
 
+
+
             <!-- busqueda liga sin resultados -->
             {{ $players->links() }}
 
