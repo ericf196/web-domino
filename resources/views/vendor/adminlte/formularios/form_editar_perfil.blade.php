@@ -82,7 +82,7 @@
 
             <div class="box box-primary box-gris">
                 <div class="box-header">
-                    <h3 class="box-title">Cambiar Fotografia</h3>
+                        <h3 class="box-title">Cambiar Fotografia</h3>
                 </div><!-- /.box-header -->
 
                 <div id="notificacion_resul_fci"></div>

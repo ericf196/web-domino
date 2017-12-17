@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\League;
+use App\News;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
+use Intervention\Image\Facades\Image;
 
 class IndexController extends Controller
 {
@@ -25,8 +27,11 @@ class IndexController extends Controller
      */
     public function estado($estado)
     {
-        $leagues = League::where('state', '=', 'LARA')->get();
-        return view('web.estado')->with('leagues',$leagues);
+        $leagues = League::where('state', '=', strtoupper($estado))->get();
+        if (!count($leagues)) {
+            return view("adminlte::errors.404");
+        }
+        return view('web.estado')->with(array('leagues' =>$leagues, 'estado' => $estado));
     }
 
     /**
@@ -34,16 +39,32 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function liga()
+    public function liga($estado, $idLiga)
     {
-        return view('web.liga');
+        $league = League::where('id', '=', $idLiga)->first();
+        $news = $league->news()->orderBy('id', 'desc')->take(3)->get();
+
+        if (!count($league)) {
+            return view("adminlte::errors.404");
+        }
+        return view('web.liga')->with(array('league' =>$league, 'news' => $news));
     }
 
-    public function create_directory()
+    public function detalle_n($estado, $idLiga, $idNoticia)
     {
-        $result=File::makeDirectory('img/league_1'  , $mode = 0777, true, true);
-        $result1=File::makeDirectory('img/league_1/users', $mode = 0777, true, true);
-        $result2=File::makeDirectory('img/league_1/news', $mode = 0777, true, true);
-        echo $result2;
+        $league = League::where('id', '=', $idLiga)->first();
+        $new = News::where('id', '=', $idNoticia)->first();
+        return view('web.noticia_in')->with(array('league' =>$league, 'new' => $new));
+
     }
+
+    public function combo()
+    {
+        $league = League::where('id', '=', 1)->first();
+        return $league;
+
+    }
+
+
+
 }

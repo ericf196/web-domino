@@ -350,14 +350,14 @@ class UsuariosController extends Controller
     }
 
 
-    public function form_editar_league($id)
+    /*public function form_editar_league($id)
     {
         $leagues = League::find($id);
         $user = $leagues->user;
         $roles = Role::all();
         return view("vendor.adminlte.formularios.form_editar_league")->with("leagues", $leagues)->with("user", $user);
 
-    }
+    }*/
 
     public function editar_league(Request $request)
     {
@@ -528,6 +528,16 @@ class UsuariosController extends Controller
         return view("adminlte::formularios.form_editar_perfil")->with('usuario', $usuario);
 
     }
+
+    public function form_editar_league()
+    {
+        $usuario = Auth::user();
+        $league = League::where('user_id', '=', $usuario->id)->first();
+
+        return view("adminlte::formularios.form_editar_league")->with('usuario', $usuario)->with('league', $league);
+
+    }
+
 
     public function cambiar_password(Request $request)
     {

@@ -11,7 +11,7 @@
         <title>Ligas de Domino</title>
 
         <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">	
-		<link rel="stylesheet" type="text/css" href="{{asset('css/animate.css')}}">
+		<!-- <link rel="stylesheet" type="text/css" href="{{asset('css/animate.css')}}"> -->
 		<link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('style.css')}}">
 
@@ -25,7 +25,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#"><img class="d-inline-block primary-image" src="img/logo-ligas-domino.png"></a>
+      <a class="navbar-brand" href="#"><img class="d-inline-block primary-image" src="{{asset('img/logo-ligas-domino.png')}}"></a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
@@ -48,7 +48,7 @@
                     <li class="dropdown-item"><a href="#">Distrito Capital</a></li>
                     <li class="dropdown-item"><a href="#">Falcón</a></li>
                     <li class="dropdown-item"><a href="#">Guárico</a></li>
-                    <li class="dropdown-item"><a href="estado">Lara</a></li>
+                    <li class="dropdown-item"><a href="lara">Lara</a></li>
                     <li class="dropdown-item"><a href="#">Mérida</a></li>
                     <li class="dropdown-item"><a href="#">Miranda</a></li>
                     <li class="dropdown-item"><a href="#">Monagas</a></li>
@@ -98,7 +98,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <img src="img/logo-liga-domino-footer.png" align="left">
+                <img src="{{asset('img/logo-liga-domino-footer.png')}}" align="left">
                 <p>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</p>
 
                 <p>"No hay nadie que ame el dolor mismo, que lo busque, lo encuentre y lo quiera, simplemente porque es el dolor."</p>
@@ -111,12 +111,15 @@
 </footer>
 
 
-		<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+		<script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
     <script src="{{asset('js/tether.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.js')}}"></script>
     <script src="{{asset('js/wow.js')}}"></script>
     <script src="{{asset('js/wow-custom.js')}}"></script>
     <script src="{{asset('js/desplazamiento-scroll.js')}}"></script>
+    <script>
+        var urlLogo = '{{ URL::asset('img/') }}';
+    </script>
     <script src="{{asset('js/affix-fixed-sticky.js')}}"></script>
 
 

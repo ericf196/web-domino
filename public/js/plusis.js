@@ -78,6 +78,9 @@ function cargar_formulario(arg) {
     if (arg == 7) {
         var miurl = urlraiz + "/form_nuevo_administrador";
     }
+    if (arg == 8) {
+        var miurl = urlraiz + "/form_editar_league";
+    }
 
     $.ajax({
         url: miurl
@@ -118,7 +121,7 @@ $(document).on("submit", ".formentrada", function (e) {
     }
     if (quien == "f_editar_league") {
         var varurl = $(this).attr("action");
-        var div_resul = "notificacion_E2";
+        var div_resul = "notificacion_resul_cil";
     }
     if (quien == "f_borrar_usuario") {
         var varurl = $(this).attr("action");
@@ -295,6 +298,14 @@ $(document).on("submit", ".formarchivo", function (e) {
         var varurl = $(this).attr("action");
         var div_resul = "notificacion_resul_fci";
     }
+    if (nombreform == "f_subir_logo") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_resul_logo";
+    }
+    if (nombreform == "f_subir_portada") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_resul_portada";
+    }
     //información del formulario
     var formData = new FormData($("#" + nombreform + "")[0]);
 
@@ -314,29 +325,12 @@ $(document).on("submit", ".formarchivo", function (e) {
         //una vez finalizado correctamente
         success: function (data) {
             $("#" + div_resul + "").html(data);
-            /*$("#fotografia_usuario").attr('src', $("#fotografia_usuario").attr('src') + '?' + Math.random());*/
         },
         error: function (data) {
             alert("ha ocurrido un error");
 
         }
     });
-});
-
-$("input[id=archivo]").change(function () {
-    console.log(this);
-    console.log(this.files[0]);
-    console.log("change");
-    /*if (this.files && this.files[0]) {
-     var reader = new FileReader();
-
-     reader.onload = function (e) {
-     $('#picture_image')
-     .attr('src', e.target.result)
-     };
-
-     reader.readAsDataURL(this.files[0]);
-     }*/
 });
 
 
@@ -350,23 +344,9 @@ $(document).on("submit", ".formentrada_noticias_liga", function (e) {
         var div_resul = "notificacion_nuevo_noticia";
         $("#submit_noticias_crear").attr("disabled", "disabled");
     }
-    /*if (quien == "f_crear_liga") {
-        var varurl = $(this).attr("action");
-        var div_resul = "capa_formularios";
-        $("#submit_liga_crear").attr("disabled", "disabled");
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('input[name="_token"]').val()
-            }
-        });
-    }*/
-
+    
     //información del formulario
-
     var formData = new FormData($("#" + quien + "")[0]);
-
-
     $.ajax({
         url: varurl,
         type: 'POST',
@@ -385,12 +365,8 @@ $(document).on("submit", ".formentrada_noticias_liga", function (e) {
             $("#" + div_resul + "").html(data);
 
             if (quien == "f_nuevo_noticia") {
-                $("#submit_noticias").removeAttr("disabled");
-            } /*else if (quien == "f_crear_liga") {
-                $("#submit_liga_crear").removeAttr("disabled");
-            }*/
-
-            /* $("#fotografia_usuario").attr('src', $("#fotografia_usuario").attr('src') + '?' + Math.random());*/
+                $("#submit_noticias_crear").removeAttr("disabled");
+            }
         },
         error: function (data) {
             alert("ha ocurrido un error" + data);

@@ -5,12 +5,12 @@ $(document).ready(function() {
         if (scrollElement.scrollTop() > top){
             wrapper.height(height);
             affixElement.addClass("affix");
-            $('.primary-image').attr('src', '../img/logo-ligas-domino2.png');
+            $('.primary-image').attr('src', urlLogo + '/logo-ligas-domino2.png');
         }
         else {
             affixElement.removeClass("affix");
             wrapper.height('auto');
-            $('.primary-image').attr('src', '../img/logo-ligas-domino.png');
+            $('.primary-image').attr('src', urlLogo + '/logo-ligas-domino.png');
         }   
       };
       

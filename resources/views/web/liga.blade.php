@@ -1,16 +1,7 @@
 @extends('layouts.home')
 @section('content')
 
-  <div class="img-fon" style="background-image:url('img/ligas-de-domino-top.jpg');"> 
-   <div class="jumbotron jumbotron-pers2">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="a-bold">Son tus deberes primero</h2>
-        <p>Si tu amigo a de ganar, obliga al mano a pasar.</p>
-      </div>
-    </div>
-   </div>
-  </div>
+    @include('web.sections.top')
 
 <section id="subContent">
     <div class="container-fluid">
@@ -24,10 +15,10 @@
           <div class="card">
 
             <div class="card-header d-flex align-items-center">
-              <h4>Venezuela / Lara / <span class="text-primary">Peña del domino</span></h4>
+              <h4>Venezuela / {{strtolower($league->state)}} / <span class="text-primary">{{ strtolower($league->name_league)}}</span></h4>
             </div>
             <div id="portadaFront">
-                <div class="portada" style="background-image: url('img/img-portada.jpg');"></div>
+                <div class="portada" style="background-image: url('../{{strtolower($league->url_portada)}}');"></div>
             </div>
 
             @include('web.sections.noticias')

@@ -17,11 +17,6 @@
 });*/
 
 
-
-
-
-
-
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
@@ -59,14 +54,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('crear_liga', 'UsuariosController@crear_liga'); //crea liga
     Route::get('form_nuevo_liga', 'UsuariosController@form_nuevo_liga');
-    Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');
+    //Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');
     Route::post('editar_league', 'UsuariosController@editar_league');
     Route::post('buscar_league', 'UsuariosController@buscar_league');
 
 
     Route::post('editar_perfil', 'UsuariosController@editar_perfil');
     Route::get('form_editar_perfil', 'UsuariosController@form_editar_perfil');
-    
+
 
     //Noticias
     Route::get('panel_noticias', 'NewsController@panel_noticias');
@@ -77,23 +72,28 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('cambiar_password', 'UsuariosController@cambiar_password');
     Route::post('cambiar_informacion', 'UsuariosController@cambiar_informacion');
     Route::post('subir_imagen_usuario', 'UsuariosController@subir_imagen_usuario');
+
     Route::post('all', 'UsuariosController@all'); // test
 
 
     Route::post('crear_administrador', 'UsuariosController@crear_administrador');
     Route::get('form_nuevo_administrador', 'UsuariosController@form_nuevo_administrador');
 
+    Route::get('form_editar_league', 'UsuariosController@form_editar_league');
+
+    //Perfil liga
+    Route::post('cambiar_informacion_league', 'LeagueController@cambiar_informacion_league');
+    Route::post('subir_logo_league', 'LeagueController@subir_logo_league');
+    Route::post('subir_portada_league', 'LeagueController@subir_portada_league');
+
+
 });
-
-
 
 
 Route::get('/', 'IndexController@index');
 Route::get('{estado}', 'IndexController@estado');
-Route::get('liga', 'IndexController@liga');
+Route::get('{estado}/{idLiga}', 'IndexController@liga');
+Route::get('{estado}/{idLiga}/{idNoticia}', 'IndexController@detalle_n');
 
 
-
-
-
-Route::get('create_directory', 'IndexController@create_directory'); // test Crear Carpeta
+Route::get('combo', 'IndexController@combo'); // combo box

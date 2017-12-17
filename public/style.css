@@ -153,6 +153,39 @@ header { }
   white-space: nowrap;
 }
 
+.line-clamp-title{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.line-clamp-content{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.justify-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.justify-center-2{
+    display: flex;
+    align-items: center;
+}
+
+.height-1{
+    height: 110px;
+    overflow: hidden;
+}
+.height-2{
+    height: 150px;
+    overflow: hidden;
+}
+
 /*-------------------------menu varios niveles -------------------------*/
 .dropdown-submenu { position: relative; }
 .dropdown-submenu>.dropdown-menu {

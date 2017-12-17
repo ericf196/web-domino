@@ -28,7 +28,7 @@
                   <div class="col">
                     <a data-toggle="collapse" data-parent="#accordion"  href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
                       <div class="cuadro1">
-                        <img src="img/jugadores.jpg">
+                        <img src="../img/jugadores.jpg">
                         <h5>15/12/17</h5>
                       </div>
                     </a>

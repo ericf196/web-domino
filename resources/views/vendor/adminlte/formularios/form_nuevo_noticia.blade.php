@@ -11,7 +11,8 @@
                 <div id="notificacion_nuevo_noticia"></div>
                 <div class="box-body">
 
-                    <form action="{{ url('nuevo_noticia') }}" method="post" id="f_nuevo_noticia" class="formentrada_noticias_liga"
+                    <form action="{{ url('nuevo_noticia') }}" method="post" id="f_nuevo_noticia"
+                          class="formentrada_noticias_liga"
                           enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
@@ -28,8 +29,8 @@
                             <div class="form-group">
                                 <label class="col-sm-2" for="description">Descripcion*</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="description" name="description" value=""
-                                           required>
+                                    <textarea rows="10" class="form-control" id="description" name="description"
+                                              value="" required></textarea>
                                 </div>
                             </div><!-- /.form-group -->
                         </div><!-- /.col -->
@@ -38,20 +39,20 @@
                         <br>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="col-sm-2" for="image_news">Agregar Imagen de la noticia*</label>
-                                <div class="col-sm-10">
-                                    <input name="image_news" id="image_news" type="file" class="archivo col-sm-6"
-                                           required/>
+                                <img src="img/avatar.jpg" alt="Notice Image"
+                                     style="width:160px;height:160px;"
+                                     id="fotografia_noticia">
+                            </div>
 
-                                    <img class="col-sm-6" src="img/photo4.jpg" alt="Noticia Imagen"
-                                         style="width:300px;height:300px;"
-                                         id="imagen_noticia">
-                                </div>
-                            </div><!-- /.form-group -->
+                            <label for="image_news">Agregar Imagen de la noticia*</label>
+                            <input name="image_news" id="image_news" type="file" class="archivo form-control"
+                                   onchange="document.getElementById('fotografia_noticia').src = window.URL.createObjectURL(this.files[0])"
+                                   required/><br/><br/>
                         </div><!-- /.col -->
 
                         <div class="box-footer col-xs-12 box-gris ">
-                            <button id="submit_noticias_crear" type="submit" class="btn btn-primary">Agregar Noticias</button>
+                            <button id="submit_noticias_crear" type="submit" class="btn btn-primary">Agregar Noticias
+                            </button>
                         </div>
 
                     </form>

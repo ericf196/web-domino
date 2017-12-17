@@ -49,7 +49,9 @@ class NewsController extends Controller
                 $extension = $archivo->getClientOriginalExtension(); //formato (jpg,gif etc)
 
                 $imagen_nombre = "noticia_id_" . $maxId . "." . $extension;
-                Image::make($archivo)->resize(460, 314)->save('img/' . $directory . '/news/' . $imagen_nombre);
+                $imagen_nombre_p = "noticia_id_p_" . $maxId . "." . $extension;
+                Image::make($archivo)->resize(640, 360)->save('img/' . $directory . '/news/' . $imagen_nombre);
+                Image::make($archivo)->resize(460, 314)->save('img/' . $directory . '/news/' . $imagen_nombre_p);
                 $noticia = News::find($maxId);
                 $url_noticia = $noticia->url_image = 'img/' . $directory . '/news/' . $imagen_nombre;
                 $noticia->save();

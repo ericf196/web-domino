@@ -27,8 +27,7 @@
                 <div class="margin" id="botones_control">
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(6);">Agregar
                         Noticias</a>
-                    <a href="{{ url("/listado_jugadores") }}" class="btn btn-xs btn-primary">Listado Jugadores (Falta
-                        modificar)</a>
+                    <a href="{{ url("/panel_noticias") }}" class="btn btn-xs btn-primary">Listado de Noticias</a>
                 </div>
 
             </div>
