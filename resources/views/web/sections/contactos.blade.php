@@ -27,11 +27,11 @@
             <div class="col-sm-4 text-center text-md-left">
               <h4>Info. de Contactos</h4>
               <h5>Correo</h5>
-              <p>info@penadeldomino.com</p>
+              <p>{{ $league->email }}</p>
               <h5>Teléfono</h5>
-              <p>+58 251 234 567 89</p>
+              <p>{{ $league->phone }}</p>
               <h5>Dirección</h5>
-              <p>Av. la mata calle 8, Cabudare, Lara - Venezuela</p>
+              <p>{!! ucwords(strtolower($league->address)) !!}</p>
               <ul class="social mb-4">
                 <li><a href="#" title="Facebook" class="fa fa-facebook"></a></li>
                 <li><a href="#" title="Twitter" class="fa fa-twitter"></a></li>

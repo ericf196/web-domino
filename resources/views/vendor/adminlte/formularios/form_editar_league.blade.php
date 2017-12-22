@@ -78,7 +78,7 @@
                     <h3 class="box-title">Informacion de Usuario Administrador</h3>
                 </div><!-- /.box-header -->
 
-                <div id="notificacion_resul_iua"></div>
+                <div id="notificacion_resul_cp"></div>
                 <!-- form start -->
 
                 <form method="post" id="f_cambiar_password" class="formentrada" action="cambiar_password">
@@ -103,14 +103,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email*</label>
-                            <input type="email" class="form-control" id="email" name="email"
+                            <label for="email_usuario">Email*</label>
+                            <input type="email" class="form-control" id="email_usuario" name="email_usuario"
                                    value="{{ $usuario->email }}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password*</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <label for="password_usuario">Password*</label>
+                            <input type="password" class="form-control" id="password_usuario" name="password_usuario" required>
                         </div>
 
                         <div class="form-group">

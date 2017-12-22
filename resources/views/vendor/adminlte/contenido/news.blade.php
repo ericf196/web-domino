@@ -72,8 +72,8 @@
                                      style="display:block"><i
                                             class="fa fa-user"></i>&nbsp;&nbsp;{{ $noticia->name  }}</div>
                             </td>--}}
-                            <td>{{ $noticia->title }}</td>
-                            <td>{{ $noticia->description }}</td>
+                            <td><div class="width-6 text-truncate">{{ $noticia->title }}</div></td>
+                            <td><div class="width-6 text-truncate">{{ $noticia->description }}</div></td>
                             <td>
 
                                 <button type="button" class="btn  btn-default btn-xs"

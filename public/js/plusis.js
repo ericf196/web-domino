@@ -142,7 +142,7 @@ $(document).on("submit", ".formentrada", function (e) {
     }*/
     if (quien == "f_cambiar_password") {
         var varurl = $(this).attr("action");
-        var div_resul = "notificacion_resul_fcp";
+        var div_resul = "notificacion_resul_cp";
     }
     if (quien == "f_editar_perfil") {
         var varurl = $(this).attr("action");

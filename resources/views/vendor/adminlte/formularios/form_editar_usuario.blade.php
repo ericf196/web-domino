@@ -71,9 +71,9 @@
             <div class="box box-primary box-gris">
 
                 <div class="box-header with-border my-box-header">
-                    <h3 class="box-title"><strong>Editar Informacion Usuario</strong></h3>
+                    <h3 class="box-title"><strong>Editar Informacion del Usuario</strong></h3>
                 </div><!-- /.box-header -->
-                <hr style="border-color:white;"/>
+
                 <div id="notificacion_E2"></div>
 
                 <div class="box-body">
@@ -175,7 +175,7 @@
             </div>
 
 
-            <div class="box box-primary   box-gris" style="margin-bottom: 200px;">
+            <div class="box box-primary   box-gris">
                 <div class="box-header with-border my-box-header">
                     <h3 class="box-title"><strong>Acceso al sistema</strong></h3>
                 </div><!-- /.box-header -->

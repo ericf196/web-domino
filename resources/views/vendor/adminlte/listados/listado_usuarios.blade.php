@@ -30,10 +30,8 @@
 
 
                 <div class="margin" id="botones_control">
-                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(7);">Agregar
-                        Administrador</a>
-                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar
-                        Jugador</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(7);">Agregar Administrador</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Jugador</a>
                     <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Jugadores</a>
                     @role('super_usuario')
                     <a href="javascript:void(0);" class="btn btn-xs btn-primary"
@@ -135,8 +133,7 @@
                 </form>
 
                 <div class="margin" id="botones_control">
-                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(4)">Agregar
-                        Liga</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(4)">Agregar Liga</a>
                     <a href="{{ url("/listado_usuarios") }}" class="btn btn-xs btn-primary">Listado Liga</a>
                 </div>
 
@@ -163,18 +160,17 @@
                             <tr role="row" class="odd">
                                 <td>{{ $league->id }}</td>
                                 <td class="mailbox-messages mailbox-name">
-                                    <div class="enlaceJs" onclick="verinfo_league({{  $league->id }})"
-                                         style="display:block"><i
-                                                class="fa fa-user"></i>&nbsp;&nbsp;{{ $league->name_league  }}</div>
+                                    <div class="enlaceJs" onclick="verinfo_league({{ $league->id }})"
+                                         style="display:block"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $league->name_league  }}</div>
                                 </td>
                                 <td>{{ $league->email }}</td>
                                 <td>{{ $league->state }}</td>
                                 <td>
                                     <button type="button" class="btn  btn-default btn-xs"
-                                            onclick="verinfo_league({{  $league->id }})"><i
+                                            onclick="verinfo_league({{ $league->id }})"><i
                                                 class="fa fa-fw fa-edit"></i></button>
                                     <button type="button" class="btn btn-danger btn-xs"
-                                            onclick="borrado_usuario({{  $league->id }});" disabled><i
+                                            onclick="borrado_usuario({{ $league->id }});" disabled><i
                                                 class="fa fa-fw fa-remove"></i></button>
                                 </td>
 

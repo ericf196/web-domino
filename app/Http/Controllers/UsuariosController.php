@@ -350,14 +350,14 @@ class UsuariosController extends Controller
     }
 
 
-    /*public function form_editar_league($id)
+    public function form_editar_league($id)
     {
-        $leagues = League::find($id);
-        $user = $leagues->user;
-        $roles = Role::all();
-        return view("vendor.adminlte.formularios.form_editar_league")->with("leagues", $leagues)->with("user", $user);
+        $league = League::find($id);
+        $usuario = $league->user;
+        //$roles = Role::all();
+        return view("vendor.adminlte.formularios.form_editar_league")->with("league", $league)->with("usuario", $usuario);
 
-    }*/
+    }
 
     public function editar_league(Request $request)
     {
@@ -408,9 +408,22 @@ class UsuariosController extends Controller
 
     public function buscar_usuario(Request $request)
     {
+        $userId = Auth::user()->id;
+        $league = League::where('user_id', '=', $userId)->first();
+
         $dato = $request->input("dato_buscado");
-        $usuarios = User::where("name", "like", "%" . $dato . "%")->orwhere("apellidos", "like", "%" . $dato . "%")->paginate(100);
+        $usuarios = User::where([['league_id', '=', $league->id], ["name", "like", "%" . $dato . "%"]])->orwhere([['league_id', '=', $league->id], ["apellidos", "like", "%" . $dato . "%"]])->paginate(100);
         return view('vendor.adminlte.listados.listado_usuarios')->with("usuarios", $usuarios);
+    }
+
+    public function buscar_jugador(Request $request)
+    {
+        $userId = Auth::user()->id;
+        $league = League::where('user_id', '=', $userId)->first();
+
+        $dato = $request->input("dato_buscado");
+        $players = User::where([['league_id', '=', $league->id], ["name", "like", "%" . $dato . "%"]])->orwhere([['league_id', '=', $league->id], ["apellidos", "like", "%" . $dato . "%"]])->paginate(100);
+        return view('vendor.adminlte.listados.listado_jugadores')->with("players", $players);
     }
 
     public function buscar_league(Request $request)
@@ -529,24 +542,29 @@ class UsuariosController extends Controller
 
     }
 
-    public function form_editar_league()
+    /*public function form_editar_league()
     {
         $usuario = Auth::user();
         $league = League::where('user_id', '=', $usuario->id)->first();
-
         return view("adminlte::formularios.form_editar_league")->with('usuario', $usuario)->with('league', $league);
-
-    }
+    }*/
 
 
     public function cambiar_password(Request $request)
     {
+        $id = $request->get("id_usuario_password");
+        $email = $request->get("email_usuario");
+        $nombres = $request->get("nombres");
+        $apellidos = $request->get("apellidos");
+        $phone = $request->get("phone");
+        $password = $request->get("password_usuario");
 
-        $id = $request->input("id_usuario_password");
-        $email = $request->input("email_usuario");
-        $password = $request->input("password_usuario");
         $usuario = User::find($id);
+
         $usuario->email = $email;
+        $usuario->telefono = $phone;
+        $usuario->nombres = $nombres;
+        $usuario->apellidos = $apellidos;
         $usuario->password = bcrypt($password);
         $save = $usuario->save();
 
@@ -606,7 +624,6 @@ class UsuariosController extends Controller
                     Image::make($request->file('archivo'))->resize(215, 214)->save('img/' . $directory . '/' . 'users/' . $nuevo_nombre);
                     $usuario->url_image = 'img/' . $directory . '/' . 'users/' . $nuevo_nombre;
                     $usuario->save();
-                    return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
                 } else {
 
                     $leagueId = League::where('user_id', '=', $usuario->id)->first()->id;
@@ -615,8 +632,8 @@ class UsuariosController extends Controller
                     Image::make($request->file('archivo'))->resize(215, 214)->save('img/league_' . $leagueId .'/users/' . $nuevo_nombre);
                     $usuario->url_image = 'img/league_' . $leagueId .'/users/' . $nuevo_nombre;
                     $usuario->save();
-                    return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
                 }
+                return view("mensajes.msj_correcto")->with("msj", "Imagen agregada correctamente");
             } catch (Exception $e) {
                 return view("mensajes.msj_rechazado")->with("msj", "Hubo un error al modificar la foto");
             }

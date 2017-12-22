@@ -15,7 +15,7 @@
           <div class="card">
 
             <div class="card-header d-flex align-items-center">
-              <h4>Venezuela / {{strtolower($league->state)}} / <span class="text-primary">{{ strtolower($league->name_league)}}</span></h4>
+              <h4>Venezuela / {!! ucwords(strtolower($league->state)) !!} / <span class="text-primary">{!! ucwords(strtolower($league->name_league)) !!}</span></h4>
             </div>
             <div id="portadaFront">
                 <div class="portada" style="background-image: url('../{{strtolower($league->url_portada)}}');"></div>

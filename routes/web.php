@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('crear_usuario', 'UsuariosController@crear_usuario');
     Route::post('editar_usuario', 'UsuariosController@editar_usuario');
     Route::post('buscar_usuario', 'UsuariosController@buscar_usuario');
+    Route::post('buscar_jugador', 'UsuariosController@buscar_jugador');
     Route::post('borrar_usuario', 'UsuariosController@borrar_usuario');
     Route::post('editar_acceso', 'UsuariosController@editar_acceso');
 
@@ -79,7 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('crear_administrador', 'UsuariosController@crear_administrador');
     Route::get('form_nuevo_administrador', 'UsuariosController@form_nuevo_administrador');
 
-    Route::get('form_editar_league', 'UsuariosController@form_editar_league');
+    Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');
+    /*Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');*/
 
     //Perfil liga
     Route::post('cambiar_informacion_league', 'LeagueController@cambiar_informacion_league');
@@ -94,6 +96,7 @@ Route::get('/', 'IndexController@index');
 Route::get('{estado}', 'IndexController@estado');
 Route::get('{estado}/{idLiga}', 'IndexController@liga');
 Route::get('{estado}/{idLiga}/{idNoticia}', 'IndexController@detalle_n');
+Route::get('{estado}/{idLiga}/noticias/{idNoticias}', 'IndexController@noticias_all');
 
 
 Route::get('combo', 'IndexController@combo'); // combo box

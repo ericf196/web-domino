@@ -25,7 +25,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#"><img class="d-inline-block primary-image" src="{{asset('img/logo-ligas-domino.png')}}"></a>
+      <a class="navbar-brand" href="/"><img class="d-inline-block primary-image" src="{{asset('img/logo-ligas-domino.png')}}"></a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
@@ -48,7 +48,7 @@
                     <li class="dropdown-item"><a href="#">Distrito Capital</a></li>
                     <li class="dropdown-item"><a href="#">Falcón</a></li>
                     <li class="dropdown-item"><a href="#">Guárico</a></li>
-                    <li class="dropdown-item"><a href="lara">Lara</a></li>
+                    <li class="dropdown-item"><a href="/lara">Lara</a></li>
                     <li class="dropdown-item"><a href="#">Mérida</a></li>
                     <li class="dropdown-item"><a href="#">Miranda</a></li>
                     <li class="dropdown-item"><a href="#">Monagas</a></li>
@@ -85,6 +85,42 @@
             <a class="nav-link" href="#">Contactanos</a>
           </li>
         </ul>
+
+
+
+        
+
+        <ul class="nav navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Ingresar</a></li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    <img class="imgCircle2" src="{{ asset(Auth::user()->url_image) }}">
+                                      {!! ucwords(strtolower(Auth::user()->name)) !!}
+                                      <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu multi-level">
+                                    <li class="dropdown-item">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Cerrar sesión
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endguest
+        </ul>
+
+
+
       </div>
     </nav>
 </header>
@@ -111,13 +147,13 @@
 </footer>
 
 
-		<script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+		<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('js/tether.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.js')}}"></script>
     <script src="{{asset('js/wow.js')}}"></script>
     <script src="{{asset('js/wow-custom.js')}}"></script>
     <script src="{{asset('js/desplazamiento-scroll.js')}}"></script>
-    <script>
+    <script>//logo affix-fixed-sticky
         var urlLogo = '{{ URL::asset('img/') }}';
     </script>
     <script src="{{asset('js/affix-fixed-sticky.js')}}"></script>

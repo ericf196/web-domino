@@ -38,10 +38,10 @@ html, body { height:100%;}
 }
 
 /*--------------------- navbar -------------------------*/
-.navbar-light .navbar-nav .nav-link {color: #fff; text-transform: uppercase; font-weight: bold; font-size: 15px; 
+.navbar-light .navbar-nav .nav-link {color: #fff; 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); }
 .navbar-light .navbar-nav .nav-link:hover { color: #ff9302; }
-.navbar-light .navbar-nav { position: absolute; top: 20px; }
+.navbar-light .navbar-nav {  }
 .navbar-light { background-color: transparent; }
 .navbar .input-group-addon { background-color: #fff; border-color: #cacaca; }
 
@@ -68,6 +68,9 @@ html, body { height:100%;}
 }
 a:focus, a:hover, button:focus, button:hover { color: #ccc; text-decoration: underline; }
 
+
+
+
 /*------------------- affix / sticky / fixed ---------------------*/
 header { }
 .navbar {
@@ -79,7 +82,7 @@ header { }
 }
 .affix { position: fixed; top: 0; right: 0; left: 0; z-index: 1030; }
 /* fixed to top styles */
-.affix.navbar { background-color: rgba(255, 255, 255, 0.8); }
+.affix.navbar { background-color: rgba(255, 255, 255, 0.8); border-bottom: 1px solid #f3f3f3; }
 .affix.navbar .nav-item>a, .affix.navbar .navbar-brand { color: #ff9302; text-shadow: none; }
 
 .affix.navbar .navbar-brand { 
@@ -152,6 +155,11 @@ header { }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .line-clamp-title{
     display: -webkit-box;
@@ -177,14 +185,14 @@ header { }
     align-items: center;
 }
 
-.height-1{
-    height: 110px;
-    overflow: hidden;
-}
-.height-2{
-    height: 150px;
-    overflow: hidden;
-}
+.height-1{ height: 110px; overflow: hidden; }
+.height-2{ height: 150px; overflow: hidden; }
+.height-3{ height: 250px; overflow: hidden; }
+
+.width-1{ width: 50px; }
+.width-2{ width: 100px; }
+.width-3{ width: 150px; }
+.width-4{ width: 200px; }
 
 /*-------------------------menu varios niveles -------------------------*/
 .dropdown-submenu { position: relative; }
@@ -396,6 +404,8 @@ section#subContent { background-color: #e9ebee; }
 /*-------------------------- pantalla ligas -----------------------------*/
 .nomLiga { list-style: none; background-color: #fff; padding: 10px; }
 .imgCircle { width: 50px; height: 50px; border-radius: 50%; border: 1px solid #c8c8c8; float: left;
+  margin-right: 10px; }
+.imgCircle2 { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #777777; float: left;
   margin-right: 10px; }
 .nomLiga:nth-child(odd) { background: #f7f7f7; } /*iten un color y el siguiente otro*/
 .nomLiga a { display: block; color: #ff9302; text-decoration: none;  }

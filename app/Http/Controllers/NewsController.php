@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\League;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class NewsController extends Controller
 {
     public function panel_noticias()
     {
-        $noticias = News::all();
+        $usuario = Auth::user();
+        $league = League::where('user_id', '=', $usuario->id)->first();
+
+        $noticias = News::where('league_id', '=', $league->id)->get();
         return view("adminlte::contenido.news")->with("noticias", $noticias);
     }
 

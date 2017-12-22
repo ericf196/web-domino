@@ -5,9 +5,8 @@
             <div class="box box-primary box-gris">
 
                 <div class="box-header with-border my-box-header">
-                    <h3 class="box-title"><strong>Editar Informacion de la liga</strong></h3>
+                    <h3 class="box-title"><strong>Agregar nueva noticia</strong></h3>
                 </div><!-- /.box-header -->
-                <hr style="border-color:white;"/>
                 <div id="notificacion_nuevo_noticia"></div>
                 <div class="box-body">
 
@@ -16,32 +15,22 @@
                           enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
-                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2" for="title">Titulo*</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="title" name="title" value="" required>
-                                </div>
+                                <label for="title">Titulo*</label>
+                                <input type="text" class="form-control" id="title" name="title" value="" required>
                             </div><!-- /.form-group -->
-                        </div><!-- /.col -->
 
-                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2" for="description">Descripcion*</label>
-                                <div class="col-sm-10">
-                                    <textarea rows="10" class="form-control" id="description" name="description"
-                                              value="" required></textarea>
-                                </div>
+                                <label for="description">Descripcion*</label>
+                                <textarea rows="10" class="form-control" id="description" name="description" value="" required></textarea>
                             </div><!-- /.form-group -->
-                        </div><!-- /.col -->
+
                         <br>
                         <br>
                         <br>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <img src="img/avatar.jpg" alt="Notice Image"
-                                     style="width:160px;height:160px;"
-                                     id="fotografia_noticia">
+                                <img src="img/avatar.jpg" alt="Notice Image" style="width:220px; height:160px;" id="fotografia_noticia">
                             </div>
 
                             <label for="image_news">Agregar Imagen de la noticia*</label>

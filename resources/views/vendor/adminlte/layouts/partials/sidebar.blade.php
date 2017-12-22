@@ -8,7 +8,7 @@
         @if (! Auth::guest())
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
+                    <img src="{{ asset(Auth::user()->url_image) }}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>
@@ -53,9 +53,9 @@
                 </ul>
             </li>
             @endrole
-            <li><a href="{{ url('/') }}"><i class='fa fa-user'></i> <span>Perfil</span></a></li>
 
             @role('admin_liga')
+            <li><a href="javascript:void(0);" onclick="cargar_formulario(8);"><i class='fa fa-user'></i> <span>Perfil de la liga</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-users'></i> <span>Jugador</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

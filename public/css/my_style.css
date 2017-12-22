@@ -1,6 +1,19 @@
 
 .enlaceJs { cursor: pointer; }
 
-. box-gris{
+/*.box-gris{
     background-color: transparent !important;
+}*/
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+.width-1{ width: 50px; }
+.width-2{ width: 100px; }
+.width-3{ width: 150px; }
+.width-4{ width: 200px; }
+.width-5{ width: 250px; }
+.width-6{ width: 300px; }
+.width-7{ width: 350px; }

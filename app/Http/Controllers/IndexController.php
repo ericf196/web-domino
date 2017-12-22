@@ -58,6 +58,18 @@ class IndexController extends Controller
 
     }
 
+    public function noticias_all($estado, $idLiga, $idNoticias)
+    {
+        $league = League::where('id', '=', $idLiga)->first();
+        $idLeague = League::where('id', '=', $idNoticias)->first();
+        $news = $idLeague->news()->orderBy('id', 'desc')->get();
+
+        if (!count($idLeague)) {
+            return view("adminlte::errors.404");
+        }
+        return view('web.noticias_all')->with(array('league' =>$league, 'news' => $news));
+    }
+
     public function combo()
     {
         $league = League::where('id', '=', 1)->first();

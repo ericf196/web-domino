@@ -15,7 +15,7 @@
             @role('admin_liga')
             <div class="box-header">
                 <h4 class="box-title">Usuarios</h4>
-                <form action="{{ url('buscar_usuario') }}" method="post">
+                <form action="{{ url('buscar_jugador') }}" method="post">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control" id="dato_buscado" name="dato_buscado" required>
@@ -28,8 +28,7 @@
                 </form>
 
                 <div class="margin" id="botones_control">
-                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar
-                        Jugador</a>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Jugador</a>
                     <a href="{{ url("/listado_jugadores") }}" class="btn btn-xs btn-primary">Listado Jugadores</a>
                 </div>
 

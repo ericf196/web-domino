@@ -15,7 +15,7 @@
 
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>Noticia de <span class="text-primary">{{ strtolower($league->name_league)}}</span>
+                            <h4>Noticia de <span class="text-primary">{!! ucwords(strtolower($league->name_league)) !!}</span>
                             </h4>
                         </div>
                         <div class="card-block">
@@ -25,7 +25,8 @@
                                     <div class="my-5">
                                         <img src="{{asset($new->url_image)}}" class="img-fluid"/>
                                     </div>
-                                    <p class="my-5">{{ $new->description }}</p>
+                                    <p class="text-primary">{!! ($new->updated_at)->format('m/d/Y H:i'); !!}</p>
+                                    <p class="my-5 text-justify">{!! nl2br($new->description) !!}</p>
                                 </div>
                             </div>
                         </div>

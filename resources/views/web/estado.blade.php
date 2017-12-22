@@ -9,16 +9,16 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>Venezuela / {{$estado}}</h4>
+                            <h4>Venezuela / {!! ucwords(strtolower($estado)) !!} </h4>
                         </div>
                         <div class="card-block">
                             <ul class="nomLigaUl">
                                 @foreach($leagues as $league)
                                     <li class="nomLiga">
                                         <a href="{{ url($estado.'/'. $league->id) }}">
-                                            <img class="imgCircle" src="{{$league->url_logo}}">
-                                            <h4>{{$league->name_league}}</h4>
-                                            <span>{{$league->city}}</span>
+                                            <img class="imgCircle" src="{{ asset($league->url_logo) }}">
+                                            <h4>{!! ucwords(strtolower($league->name_league)) !!}</h4>
+                                            <span>{!! ucwords(strtolower($league->city)) !!}</span>
                                         </a>
                                     </li>
                                 @endforeach
