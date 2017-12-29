@@ -67,7 +67,9 @@ Route::group(['middleware' => 'auth'], function () {
     //Noticias
     Route::get('panel_noticias', 'NewsController@panel_noticias');
     Route::get('form_nuevo_noticia', 'NewsController@form_nuevo_noticia');
+    Route::get('form_editar_noticia/{id}', 'NewsController@form_editar_noticia');
     Route::post('nuevo_noticia', 'NewsController@nuevo_noticia');
+    Route::post('editar_noticia', 'NewsController@editar_noticia');
 
     //Perfil Usuario
     Route::post('cambiar_password', 'UsuariosController@cambiar_password');
@@ -81,13 +83,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('form_nuevo_administrador', 'UsuariosController@form_nuevo_administrador');
 
     Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');
-    /*Route::get('form_editar_league/{id}', 'UsuariosController@form_editar_league');*/
+    Route::get('form_editar_league_admin', 'UsuariosController@form_editar_league_admin');
 
     //Perfil liga
     Route::post('cambiar_informacion_league', 'LeagueController@cambiar_informacion_league');
     Route::post('subir_logo_league', 'LeagueController@subir_logo_league');
     Route::post('subir_portada_league', 'LeagueController@subir_portada_league');
 
+
+    //Games Super Polla
+    Route::get('super_polla', 'GameController@super_polla');
+    Route::post('tabla_super_polla', 'GameController@tabla_super_polla');
 
 });
 

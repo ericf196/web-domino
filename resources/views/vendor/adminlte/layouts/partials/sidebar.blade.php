@@ -65,7 +65,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-sign-language'></i> <span>Juegos</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('/') }}">Superpolla</a></li>
+                    <li><a href="{{ url('/super_polla') }}">Superpolla</a></li>
                     <li><a href="{{ url('/') }}">Grand Slam</a></li>
                     <li><a href="{{ url('/') }}">Batallas entre escuderías</a></li>
                 </ul>

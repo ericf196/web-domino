@@ -77,7 +77,7 @@
                             <td>
 
                                 <button type="button" class="btn  btn-default btn-xs"
-                                        onclick="verinfo_usuario({{  $noticia->id }})" disabled><i
+                                        onclick="verinfo_noticia({{  $noticia->id }})" ><i
                                             class="fa fa-fw fa-edit"></i></button>
                                 <button type="button" class="btn  btn-danger btn-xs"
                                         onclick="borrado_usuario({{  $noticia->id }});" disabled><i

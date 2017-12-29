@@ -542,12 +542,12 @@ class UsuariosController extends Controller
 
     }
 
-    /*public function form_editar_league()
+    public function form_editar_league_admin()
     {
         $usuario = Auth::user();
         $league = League::where('user_id', '=', $usuario->id)->first();
         return view("adminlte::formularios.form_editar_league")->with('usuario', $usuario)->with('league', $league);
-    }*/
+    }
 
 
     public function cambiar_password(Request $request)

@@ -21,10 +21,27 @@ function verinfo_usuario(arg) {
 }
 
 function verinfo_league(arg) {
-
-
     var urlraiz = $("#url_raiz_proyecto").val();
     var miurl = urlraiz + "/form_editar_league/" + arg + "";
+    $("#capa_modal").show();
+    $("#capa_formularios").show();
+    var screenTop = $(document).scrollTop();
+    $("#capa_formularios").css('top', screenTop);
+    $("#capa_formularios").html($("#cargador_empresa").html());
+
+    $.ajax({
+        url: miurl
+    }).done(function (resul) {
+        $("#capa_formularios").html(resul);
+
+    }).fail(function () {
+        $("#capa_formularios").html('<span>... Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+    });
+
+}
+function verinfo_noticia(arg) {
+    var urlraiz = $("#url_raiz_proyecto").val();
+    var miurl = urlraiz + "/form_editar_noticia/" + arg + "";
     $("#capa_modal").show();
     $("#capa_formularios").show();
     var screenTop = $(document).scrollTop();
@@ -79,7 +96,7 @@ function cargar_formulario(arg) {
         var miurl = urlraiz + "/form_nuevo_administrador";
     }
     if (arg == 8) {
-        var miurl = urlraiz + "/form_editar_league";
+        var miurl = urlraiz + "/form_editar_league_admin";
     }
 
     $.ajax({
@@ -137,9 +154,9 @@ $(document).on("submit", ".formentrada", function (e) {
     }
 
     /*if (quien == "f_editar_perfil") {
-        var varurl = $(this).attr("action");
-        var div_resul = "capa_formularios";
-    }*/
+     var varurl = $(this).attr("action");
+     var div_resul = "capa_formularios";
+     }*/
     if (quien == "f_cambiar_password") {
         var varurl = $(this).attr("action");
         var div_resul = "notificacion_resul_cp";
@@ -174,7 +191,7 @@ $(document).on("submit", ".formentrada", function (e) {
         },
         complete: function () {
             $('button[type=submit]').removeAttr("disabled");
-           /* $("#" + quien)[0].reset();*/
+            /* $("#" + quien)[0].reset();*/
         }
 
     });
@@ -344,7 +361,12 @@ $(document).on("submit", ".formentrada_noticias_liga", function (e) {
         var div_resul = "notificacion_nuevo_noticia";
         $("#submit_noticias_crear").attr("disabled", "disabled");
     }
-    
+    if (quien == "f_editar_noticia") {
+        var varurl = $(this).attr("action");
+        var div_resul = "notificacion_editar_noticia";
+        $("#submit_editar_noticia").attr("disabled", "disabled");
+    }
+
     //información del formulario
     var formData = new FormData($("#" + quien + "")[0]);
     $.ajax({
@@ -364,8 +386,11 @@ $(document).on("submit", ".formentrada_noticias_liga", function (e) {
         success: function (data) {
             $("#" + div_resul + "").html(data);
 
-            if (quien == "f_nuevo_noticia") {
+            if (quien == "f_editar_noticia") {
                 $("#submit_noticias_crear").removeAttr("disabled");
+            }
+            if (quien == "f_editar_noticia") {
+                $("#submit_editar_noticia").removeAttr("disabled");
             }
         },
         error: function (data) {
@@ -376,3 +401,39 @@ $(document).on("submit", ".formentrada_noticias_liga", function (e) {
 
 })
 
+$(document).on("submit", ".submit_super_polla", function (e) {
+    e.preventDefault();
+
+    var quien = $(this).attr("id");
+    var formu = $(this);
+    var varurl = "";
+    if (quien == "f_super_polla") {
+        var varurl = $(this).attr("action");
+        var div_resul = "game_super_polla";
+        //$("#submit_noticias_crear").attr("disabled", "disabled");
+    }
+    console.log(formu);
+    $.ajax({
+        url: varurl,
+        type: 'POST',
+        data: formu.serialize(),
+        dataType: 'html',
+
+        beforeSend: function () {
+            $("#" + div_resul + "").html($("#cargador_empresa").html());
+        },
+
+        success: function (data) {
+            $("#" + div_resul + "").html(data);
+
+            /*if (quien == "f_editar_noticia") {
+                $("#submit_noticias_crear").removeAttr("disabled");
+            }*/
+        },
+        error: function (data) {
+            alert("ha ocurrido un error" + data);
+
+        }
+    });
+
+});
