@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $this->belongsTo(League::class);
     }
 
+    public function categories_individual()
+    {
+        return $this->belongsToMany(Category::class, 'games_individual', 'user_id', 'category_id');
+    }
+
 
 
 

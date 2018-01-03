@@ -95,14 +95,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('super_polla', 'GameController@super_polla');
     Route::post('tabla_super_polla', 'GameController@tabla_super_polla');
 
+    //Route::post('sent_table', 'GameController@sent_table');
+
+
 });
 
 
 Route::get('/', 'IndexController@index');
+Route::post('sent_table', 'IndexController@sent_table'); // test table
 Route::get('{estado}', 'IndexController@estado');
 Route::get('{estado}/{idLiga}', 'IndexController@liga');
 Route::get('{estado}/{idLiga}/{idNoticia}', 'IndexController@detalle_n');
 Route::get('{estado}/{idLiga}/noticias/{idNoticias}', 'IndexController@noticias_all');
-
-
-Route::get('combo', 'IndexController@combo'); // combo box

@@ -412,7 +412,7 @@ $(document).on("submit", ".submit_super_polla", function (e) {
         var div_resul = "game_super_polla";
         //$("#submit_noticias_crear").attr("disabled", "disabled");
     }
-    console.log(formu);
+
     $.ajax({
         url: varurl,
         type: 'POST',
@@ -427,13 +427,13 @@ $(document).on("submit", ".submit_super_polla", function (e) {
             $("#" + div_resul + "").html(data);
 
             /*if (quien == "f_editar_noticia") {
-                $("#submit_noticias_crear").removeAttr("disabled");
-            }*/
+             $("#submit_noticias_crear").removeAttr("disabled");
+             }*/
         },
         error: function (data) {
             alert("ha ocurrido un error" + data);
 
         }
     });
-
 });
+
