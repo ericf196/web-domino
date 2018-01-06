@@ -21,6 +21,14 @@
 .input-min{
   display: inline-block;
   overflow: hidden;
-  /*max-width: 40px;*/
+  max-width: 50px;
 }
 .cienPor{ width: 100% }
+
+#game_super_polla{
+  overflow: hidden;
+  background-color: #fff;
+  padding: 15px;
+}
+.contentMesas { overflow: hidden; }
+.mesaNombre { float: left; margin-bottom: 15px; overflow: hidden; height: 30px;}

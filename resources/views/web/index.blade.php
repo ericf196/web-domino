@@ -28,12 +28,13 @@
             <div class="col-md-6">
                 <div class="text">
                     <h2 class="a-bold">Ligas de domino</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat pulvinar tincidunt. Nam eget sagittis ex. Mauris porttitor est non diam tincidunt, sollicitudin fringilla ex egestas. Duis mauris felis, imperdiet ac sapien eleifend, mollis maximus leo. Vestibulum pulvinar diam ligula, nec vehicula lectus tempus id. Sed congue semper enim et dictum. Fusce tempus dapibus arcu, ut lobortis odio pulvinar sit amet.</p> 
+                    <p>Ligasdedomino.com es un sitio web diseñado para albergar a todas las ligas organizadas del juego de domino en el mundo entero, un site donde te mantendrás actualizado con lo último en noticias, torneos, ranking de jugadores y demás información de las diferentes ligas de domino de todos los países donde se juega esta apasionante disciplina.</p> 
 
-                    <p>Suspendisse rutrum ultrices lorem. Sed hendrerit tristique elit, gravida pharetra diam volutpat ac. Aenean bibendum rhoncus efficitur. Duis iaculis scelerisque mi, ac tristique ipsum dictum et. Aliquam euismod finibus est et imperdiet. Praesent egestas felis sit amet sapien varius, gravida commodo lacus pharetra. Sed in suscipit metus, non tempor sem.</p>
+                    <p>Además cada liga tendrá en esta web su propio espacio donde exhibirá los ranking de sus jugadores locales, torneos y demás actividades, también ligasdedomino.com ofrece a sus ligas afiliadas la plataforma tecnológica web más avanzada que hay hoy día para organizar de manera automática y on line sus torneos con estadísticas y resultados en tiempo real.</p>
 
-                    <p>Praesent egestas felis sit amet sapien varius, gravida commodo lacus pharetra. Sed in suscipit metus, non tempor sem.</p>
-                    <a class="btn btn-secondary" href="#"> Leer más</a>
+                    <p>También ponemos a su disposición el juego de domino on line más interactivo del mundo donde participaras en torneos on line con jugadores de todo el mundo.</p>
+
+                    <!-- <a class="btn btn-secondary" href="#"> Leer más</a> -->
                 </div>
             </div>
         </div>

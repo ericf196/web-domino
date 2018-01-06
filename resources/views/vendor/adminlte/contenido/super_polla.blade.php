@@ -21,12 +21,52 @@
             <button class="btn btn-primary" id="submit_super_polla" type="submit" value="Enviar" name="super_polla" >Enviar
             </button>
         </form>
+        <br>
+        <div id="game_super_polla"></div><br><hr><br>
 
+            <div class="box box-primary">
 
+                <div class="table-responsive">
 
-        <div id="game_super_polla" style="border: dotted 1px black; height: 800px;"></div>
+                    <table class="table table-hover table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
+                        {{-- @foreach($leagues as $league) --}}
+                            <tr role="row" class="odd">
+                                <td>{{-- --}}</td>
+                                <td class="mailbox-messages mailbox-name">
+                                    <div class="enlaceJs" onclick="verinfo_league({{--  --}})"
+                                         style="display:block"><i class="fa fa-calendar"></i>&nbsp;&nbsp;{{--   --}}</div>
+                                </td>
+                                <td>{{--  --}}</td>
 
+                            </tr>
+                        {{--  @endforeach --}}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+             <!-- busqueda liga sin resultados -->
+            {{-- $leagues->links() --}}
+
+            {{-- @if(count($leagues)==0) --}}
+            <div class="box box-primary">
+                <div class='aprobado' style="margin-top:70px; text-align: center">
+                    <label style='color:#177F6B'>
+                         ... no se encontraron resultados para su busqueda...
+                    </label>
+                </div>
+            </div>
+            {{-- @endif --}}
     </section>
 @endsection
 

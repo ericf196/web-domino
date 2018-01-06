@@ -194,6 +194,9 @@ header { }
 .width-3{ width: 150px; }
 .width-4{ width: 200px; }
 
+.span-text { margin-top:-20px; color:#777; }
+.title-h { margin-bottom: -8px; }
+
 /*-------------------------menu varios niveles -------------------------*/
 .dropdown-submenu { position: relative; }
 .dropdown-submenu>.dropdown-menu {

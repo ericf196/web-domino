@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('style.css')}}">
 
-    <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" />
 
 
 </head>
@@ -174,6 +174,10 @@
 
     })();
 </script>
-
+<script>
+    $('.show-hide').click(function(){
+        $('.collapse').collapse('hide');
+    });
+</script>
 </body>
 </html>

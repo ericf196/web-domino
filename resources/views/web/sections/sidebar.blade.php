@@ -3,7 +3,7 @@
               <h5 class="text-center">Información de la liga</h5>
             </div>
             <div class="card-block">
-              <p class="text-center"><img class="logoLigaUser" src="{{ asset($league->url_logo)}}" /></p>
+              <p class="text-center"><img class="logoLigaUser img-fluid" src="{{ asset($league->url_logo)}}" /></p>
               <p>
                 Nombre: <strong>{{$league->name_league}}</strong><br>
                 Ubicación: <strong>{{strtolower($league->city)}}, {{strtolower($league->state)}} - Venezuela</strong><br>

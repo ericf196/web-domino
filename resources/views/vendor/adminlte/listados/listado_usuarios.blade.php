@@ -103,7 +103,7 @@
             {{ $usuarios->links() }}
 
             @if(count($usuarios)==0)
-                <div class="box box-primary col-xs-12">
+                <div class="box box-primary">
                     <div class='aprobado' style="margin-top:70px; text-align: center">
                         <label style='color:#177F6B'>
                             ... no se encontraron resultados para su busqueda...

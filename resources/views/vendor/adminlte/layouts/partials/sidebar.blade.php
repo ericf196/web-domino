@@ -21,7 +21,7 @@
         <!-- search form (Optional) -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="{{ trans('adminlte_lang::message.search') }}..."/>
+                <input type="text" name="q" class="form-control" placeholder="{{ trans('adminlte_lang::message.search') }}..." disabled />
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
@@ -71,6 +71,7 @@
                 </ul>
             </li>
             <li><a href="{{ url('/panel_noticias') }}"><i class='fa fa-user'></i> <span>Noticias</span></a></li>
+            <li><a href="{{ url('/panel_anun') }}"><i class='fa fa-user'></i> <span>Publicidad</span></a></li>
             @endrole
             {{-- @role('administrador')
             @endrole --}}
