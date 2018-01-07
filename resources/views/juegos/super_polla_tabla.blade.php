@@ -512,9 +512,6 @@
         $('#Snombre' + vCon).text($("#nombreJG" + vCon).val());//Si se quiere mostrar el nombre
 //CuentaReg($("#PuntosF1"+vCon).attr('Conti'),$("#PuntosF1"+vCon).attr('IdNum'));
 
-
-
-
         if (Con > vCon) {
             vCon++;
             reordenar(vCon);
@@ -537,11 +534,7 @@
         CuentaReg("", $("#PuntosF1" + Math.round(parseInt(N) + parseInt(3))).attr('IdNum'));
 
     }
-
-
-
 </script>
-
 
 <script src="{{asset('js/juegos.js')}}"></script>
 

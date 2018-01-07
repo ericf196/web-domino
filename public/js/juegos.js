@@ -45,6 +45,7 @@ $(document).ready(function () {
         });
 
         // console.log(obj);
+
         $.ajax({
             // la URL para la petición
             url: '/sent_table',

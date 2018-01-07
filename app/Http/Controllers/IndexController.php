@@ -49,6 +49,7 @@ class IndexController extends Controller
         $league = League::where('id', '=', $idLiga)->first();
         $news = $league->news()->orderBy('id', 'desc')->take(3)->get();
         $rankingFive = Category::find(1)->users()->where('league_id', $idLiga)->orderBy('games.avg', 'desc')->take(5)->get();
+
         $rankingSupP = $this->ranking_super_polla($idLiga);
         //dd($rankingSupP);
         //dd($rankingSupP['super_polla_1'][0]->id);
@@ -56,6 +57,7 @@ class IndexController extends Controller
             return view("adminlte::errors.404");
         }
         return view('web.liga')->with(array('league' => $league, 'news' => $news, 'rankings' => $rankingFive, 'rankingsS' => $rankingSupP));
+
     }
 
     public function detalle_n($estado, $idLiga, $idNoticia)
@@ -93,9 +95,11 @@ class IndexController extends Controller
         $rowTable = $request->json()->all();
         foreach ($rowTable as $row) {
             User::find($row['IDJUGADOR'])->categories_individual()->attach(array(1 => array('jj' => $row['J/J'], 'jg' => $row['J/G'], 'jp' => $row['J/P'],
+
                 'pts_p' => $row['PTOS P'], 'pts_n' => $row['PTOS N'], 'pts_n_p' => 0, 'pts_p_p' => 0, 'avg' => $row['AVG'], 'efec' => $row['EFEC'], 'pro' => $row['PRO'], 'z' => $row['Z'], 'pro_g' => $row['PRO2'], 'season' => Carbon::now()->year)));
 
             $t = User::find($row['IDJUGADOR'])->categories()->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'pro_g', 'z')->wherePivot('category_id', 1)->wherePivot('season', '=', Carbon::now()->year)->first();
+
 
             if ($t) {
                 $jj = $t->pivot->jj;
@@ -107,6 +111,7 @@ class IndexController extends Controller
                 $efec = $t->pivot->efec;
                 $pro = $t->pivot->pro;
                 $pro_g = $t->pivot->pro_g;
+
                 $z = $t->pivot->z;
 
                 $jjAcum = $jj + $row['J/J']; //Juegos Jugados
@@ -133,6 +138,7 @@ class IndexController extends Controller
                     'pts_p' => $row['PTOS P'], 'pts_n' => $row['PTOS N'], 'pts_n_p' => 0, 'pts_p_p' => 0, 'avg' => $row['AVG'], 'efec' => $row['EFEC']
                 , 'pro' => $row['PRO'], 'z' => $row['Z'], 'pro_g' => $row['PRO2'], 'season' => Carbon::now()->year)));
 
+
             }
         }
         DB::commit();
@@ -149,6 +155,7 @@ class IndexController extends Controller
 
 
     public function ranking_super_polla($idLiga)
+
     {
         /*return User::where('league_id', '=', 1)->has('categories')->with(array('categories' => function ($query) {
            $query->wherePivot('category_id', '1')->orderBy('games.avg', 'DESC');
@@ -158,6 +165,7 @@ class IndexController extends Controller
         return $pedroGorrin;*/
 
         //return Category::find(1)->users_individual()->select('created_at')->where('league_id', 1)->distinct('created_at')/*->orderBy('games_individual.avg', 'desc')->orderBy('games_individual.created_at', 'desc')->take(5)*/->get();
+
         $dates = DB::table('games_individual')->orderBy('created_at', 'desc')->select('created_at')->distinct('created_at')->take(4)->get();
         $data = [];
         foreach ($dates as $key => $date) {
@@ -165,6 +173,7 @@ class IndexController extends Controller
             $collection = Category::find(1)->users_individual()->where('league_id', $idLiga)->orderBy('games_individual.avg', 'desc')->where('games_individual.created_at', $date->created_at)->take(3)->get(); // between
             //echo $collection->toJson();
             $data['' . Carbon::parse($date->created_at)->format('d/m/Y')] = $collection;
+
             //echo Carbon::parse($date->created_at)->format('d/m/Y h:i');
             /*echo gettype($collection);
             die();*/

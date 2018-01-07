@@ -76,9 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('cambiar_informacion', 'UsuariosController@cambiar_informacion');
     Route::post('subir_imagen_usuario', 'UsuariosController@subir_imagen_usuario');
 
-
-
-
     Route::post('crear_administrador', 'UsuariosController@crear_administrador');
     Route::get('form_nuevo_administrador', 'UsuariosController@form_nuevo_administrador');
 
@@ -99,6 +96,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::get('all', 'UsuariosController@all'); // test
 Route::get('ranking_super_polla', 'IndexController@ranking_super_polla');
+
 Route::get('/', 'IndexController@index');
 Route::post('sent_table', 'IndexController@sent_table'); // test table
 Route::get('{estado}', 'IndexController@estado');

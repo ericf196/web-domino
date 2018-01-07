@@ -107,7 +107,6 @@
                         <?php $numCo1++ ?>
                     @endforeach
 
-
                     <div class="text-right">
                         <a class="btn btn-secondary" href="#"> Ver Todas </a>
                     </div>
@@ -122,6 +121,7 @@
                 <div class="row text-center">
                     @foreach($rankings as $key=>$ranking)
                         <div class="col">
+
                             <a class="show-hide" data-toggle="collapse" data-parent="#accordion"
                                href="#collapse-{{ $ranking->id }}" aria-expanded="false" aria-controls="collapse-3">
                                 <img class="jugadorInd" src="{{ asset($ranking->url_image) }}">
@@ -133,6 +133,7 @@
                             </a>
                         </div>
                     @endforeach
+
                 </div>
                 @foreach($rankings as $key=>$ranking)
                     <div class="collapse" id="collapse-{{ $ranking->id }}">
@@ -201,6 +202,7 @@
                     <div class="col">
                         <div class="cuadro2">
                             <!--<img src="img/logo-copa-lara.jpg"> -->
+
                         </div>
                         <h6>3er GRAND SLAM 2017 COPA ESTADO LARA</h6>
                     </div>

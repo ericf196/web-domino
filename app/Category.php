@@ -13,7 +13,9 @@ class Category extends Model
 
     public function users()
     {
+
         return $this->belongsToMany(User::class, 'games','category_id','user_id')->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'z', 'pro_g' , 'season')->wherePivot('season', Carbon::now()->year);
+
     }
 
     public function leagues()
