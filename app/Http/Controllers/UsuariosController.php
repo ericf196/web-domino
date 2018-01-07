@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\League;
 use Illuminate\Http\Request;
 use App\User;
@@ -113,6 +114,7 @@ class UsuariosController extends Controller
         $usuario->email = $request->input("email");
         $usuario->password = bcrypt($request->input("password"));
         $usuario->league_id = $idLeague;
+        $usuario->url_image = 'img/avatar.jpg';
         $save = $usuario->save();
         $userIdInclude = User::where('email', '=', $request->input("email"))->first()->id;
 
@@ -208,6 +210,7 @@ class UsuariosController extends Controller
             $usuario->state = strtoupper($request->get("state"));
             $usuario->cedula = $request->get("cedula");
             $usuario->email = $request->get("email");
+            $usuario->url_image  = 'img/avatar.jpg';
             $usuario->league_id = 0;
 
             $usuario->save();
@@ -227,6 +230,8 @@ class UsuariosController extends Controller
             $league->email = $request->get("email_league");
             $league->phone = $request->get("phone_league");
             $league->user_id = $userIdInclude;
+            $league->url_logo = 'img/logo-liga.jpg';
+            $league->url_portada = 'img/portada.jpg';
             $league->save();
 
             /*$archivo = $request->file('image_liga');*/
@@ -660,7 +665,6 @@ class UsuariosController extends Controller
         /*foreach ($league->categories()->wherePivot('category_id', '=', 3)->get() as $category) {
             echo $category->users()->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'pro_g', 'created_at')->get();
         }*/
-
         echo "test";
     }
 

@@ -25,7 +25,7 @@
                                     <div class="my-5">
                                         <img src="{{asset($new->url_image)}}" class="img-fluid"/>
                                     </div>
-                                    <p class="text-primary">{!! ($new->updated_at)->format('m/d/Y H:i'); !!}</p>
+                                    <p class="text-primary">{!! ($new->updated_at)->format('m/d/Y H:i') !!}</p>
                                     <p class="my-5 text-justify">{!! nl2br($new->description) !!}</p>
                                 </div>
                             </div>

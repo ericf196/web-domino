@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -12,7 +13,7 @@ class Category extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'games','category_id','user_id')/*->withPivot('jj','jg','jp','pts_p','pts_n','avg','efec','pro','pro_g','created_at')*/;
+        return $this->belongsToMany(User::class, 'games','category_id','user_id')->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro', 'z', 'pro_g' , 'season')->wherePivot('season', Carbon::now()->year);
     }
 
     public function leagues()
@@ -22,6 +23,6 @@ class Category extends Model
 
     public function users_individual()
     {
-        return $this->belongsToMany(User::class, 'games_individual','category_id','user_id')/*->withPivot('jj','jg','jp','pts_p','pts_n','avg','efec','pro','pro_g','created_at')*/;
+        return $this->belongsToMany(User::class, 'games_individual','category_id','user_id')->withPivot('jj','jg','jp','pts_p','pts_n','avg','efec','pro', 'z', 'pro_g' ,'created_at');
     }
 }

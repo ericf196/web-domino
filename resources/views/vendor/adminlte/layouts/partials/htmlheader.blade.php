@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title>3 AdminLTE 2 with Laravel - @yield('htmlheader_title', 'Your title here') </title>
+    <title>Admin Ligas de Domino - @yield('htmlheader_title', 'Your title here') </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -8,6 +8,7 @@
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/plusis.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/my_style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

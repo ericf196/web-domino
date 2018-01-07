@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('cambiar_informacion', 'UsuariosController@cambiar_informacion');
     Route::post('subir_imagen_usuario', 'UsuariosController@subir_imagen_usuario');
 
-    Route::post('all', 'UsuariosController@all'); // test
+
 
 
     Route::post('crear_administrador', 'UsuariosController@crear_administrador');
@@ -95,12 +95,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('super_polla', 'GameController@super_polla');
     Route::post('tabla_super_polla', 'GameController@tabla_super_polla');
 
-    //Route::post('sent_table', 'GameController@sent_table');
-
 
 });
-
-
+Route::get('all', 'UsuariosController@all'); // test
+Route::get('ranking_super_polla', 'IndexController@ranking_super_polla');
 Route::get('/', 'IndexController@index');
 Route::post('sent_table', 'IndexController@sent_table'); // test table
 Route::get('{estado}', 'IndexController@estado');

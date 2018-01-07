@@ -21,8 +21,8 @@
                 <div class="portada" style="background-image: url('../{{strtolower($league->url_portada)}}');"></div>
             </div>
 
-            @include('web.sections.noticias')
             @include('web.sections.juegos')
+            @include('web.sections.noticias')
             @include('web.sections.contactos')       
                 
           </div>

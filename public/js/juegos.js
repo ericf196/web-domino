@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
     $('#submit_tabla').click(function () {
-        console.log("funcionando submit table");
         var myTab = document.getElementById('table_super_polla');
 
         var values = [];
@@ -35,11 +34,17 @@ $(document).ready(function () {
 
         }
         obj = obj + ']';
-        console.log(obj);
 
         var div_resul = "notificacion_tabla";
         // $("#submit_tabla").attr("disabled", "disabled");
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // console.log(obj);
         $.ajax({
             // la URL para la petición
             url: '/sent_table',
@@ -58,6 +63,8 @@ $(document).ready(function () {
                 $("#" + div_resul + "").html('Ha ocurrido un error, revise su conexion e intentelo nuevamente');
             },
             complete: function () {
+                window.location.href = window.location.pathname;
+
                 /*$('button[type=submit]').removeAttr("disabled");
                  $("#" + quien)[0].reset();*/
             }

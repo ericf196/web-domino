@@ -51,6 +51,9 @@ margin-bottom: 10px;
   width: auto;
   min-height: 90%;
   z-index: 1050;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 4px;
 }
 
 

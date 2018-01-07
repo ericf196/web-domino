@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'league_id', 'nombres', 'apellidos', 'city', 'state', 'cedula', 'url_image', 'telefono', 'team', 'association',
+        'name', 'email', 'password', 'league_id', 'nombres', 'apellidos', 'city', 'state', 'cedula', 'url_image', 'telefono', 'team', 'association','user_id',
     ];
 
     /**
@@ -37,7 +38,7 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'games', 'user_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'games', 'user_id', 'category_id')->withPivot('jj', 'jg', 'jp', 'pts_p', 'pts_n', 'avg', 'efec', 'pro','z', 'pro_g' , 'season')->wherePivot('season', Carbon::now()->year);
     }
 
     public function league_player()
